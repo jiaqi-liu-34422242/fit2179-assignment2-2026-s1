@@ -1,0 +1,25 @@
+node_id,label,node_type,x_pos,y_pos,access_category,size_metric
+r_Phillip Island,Phillip Island,Tourism region,0,12,Moderate,49.9
+r_Grampians,Grampians,Tourism region,0,11,Moderate,45.1
+r_Great Ocean Road,Great Ocean Road,Tourism region,0,10,Moderate,41.2
+r_High Country,High Country,Tourism region,0,9,Moderate,35.8
+r_Mornington Peninsula,Mornington Peninsula,Tourism region,0,8,Moderate,30.3
+r_Yarra Valley and Dandenong Ranges,Yarra Valley and Dandenong Ranges,Tourism region,0,7,Moderate,29.5
+r_Daylesford and Macedon Ranges,Daylesford and Macedon Ranges,Tourism region,0,6,Moderate,24.6
+r_Gippsland,Gippsland,Tourism region,0,5,Good,4.9
+r_Murray,Murray,Tourism region,0,4,Good,1.3
+r_Goldfields,Goldfields,Tourism region,0,3,Good,0.9
+r_Geelong and the Bellarine,Geelong and the Bellarine,Tourism region,0,2,Good,0.8
+r_Melbourne,Melbourne,Tourism region,0,1,Good,0.6
+s_Pakenham Station,Pakenham Station,Regional train station,1,12,Station,1.0
+s_Ararat Station,Ararat Station,Regional train station,1,11,Station,1.0
+s_Colac Railway Station,Colac Railway Station,Regional train station,1,10,Station,1.0
+s_Benalla Railway Station,Benalla Railway Station,Regional train station,1,9,Station,1.0
+s_Dandenong Station,Dandenong Station,Regional train station,1,8,Station,1.0
+s_Clayton Station,Clayton Station,Regional train station,1,7,Station,1.0
+s_Creswick Railway Station,Creswick Railway Station,Regional train station,1,6,Station,1.0
+s_Rosedale Railway Station,Rosedale Railway Station,Regional train station,1,5,Station,1.0
+s_Echuca Railway Station,Echuca Railway Station,Regional train station,1,4,Station,1.0
+s_Ballarat Railway Station,Ballarat Railway Station,Regional train station,1,3,Station,1.0
+s_Geelong Railway Station ,Geelong Railway Station ,Regional train station,1,2,Station,1.0
+s_Flinders Street Railway Station,Flinders Street Railway Station,Regional train station,1,1,Station,1.0

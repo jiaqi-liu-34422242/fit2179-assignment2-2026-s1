@@ -1,0 +1,102 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": "container",
+  "height": 340,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "transparent",
+  "data": {
+    "url": "data/tourism_demand_area.csv"
+  },
+  "mark": {
+    "type": "area",
+    "line": true,
+    "opacity": 0.9
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Year ending December"
+    },
+    "y": {
+      "field": "visitor_trips_000",
+      "type": "quantitative",
+      "title": "Visitor trips (000s)",
+      "stack": "zero",
+      "axis": {
+        "grid": true,
+        "gridColor": "#E8E4DB"
+      }
+    },
+    "color": {
+      "field": "visitor_type",
+      "type": "nominal",
+      "title": "Visitor type",
+      "scale": {
+        "domain": [
+          "Intrastate overnight",
+          "Interstate overnight",
+          "International overnight"
+        ],
+        "range": [
+          "#004B87",
+          "#78BE20",
+          "#F58220"
+        ]
+      }
+    },
+    "order": {
+      "field": "visitor_type",
+      "type": "nominal",
+      "sort": [
+        "Intrastate overnight",
+        "Interstate overnight",
+        "International overnight"
+      ]
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "visitor_type",
+        "type": "nominal",
+        "title": "Visitor type"
+      },
+      {
+        "field": "visitor_trips_000",
+        "type": "quantitative",
+        "title": "Visitor trips (000s)",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#4A4A4A",
+      "titleColor": "#4A4A4A"
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom",
+      "direction": "horizontal"
+    }
+  }
+}

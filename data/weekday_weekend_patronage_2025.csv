@@ -1,0 +1,11 @@
+mode_label,Day_type,avg_daily_patronage,avg_daily_patronage_thousands
+Metro train,Normal Weekday,586487,586.487
+Metro train,Weekend,288861,288.861
+Tram,Normal Weekday,461519,461.519
+Tram,Weekend,355275,355.275
+Metro bus,Normal Weekday,385508,385.508
+Metro bus,Weekend,166405,166.405
+Regional train,Normal Weekday,62919,62.919
+Regional train,Weekend,35930,35.93
+Regional bus,Normal Weekday,34060,34.06
+Regional bus,Weekend,12795,12.795

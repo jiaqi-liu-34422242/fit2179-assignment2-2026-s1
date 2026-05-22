@@ -1,0 +1,95 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": "container",
+  "height": 360,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "transparent",
+  "data": {
+    "url": "data/lga_stop_density_melbourne_extremes.csv"
+  },
+  "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 85,
+    "opacity": 0.9,
+    "color": "#004B87"
+  },
+  "encoding": {
+    "y": {
+      "field": "LGA_NAME21",
+      "type": "nominal",
+      "title": "Local government area",
+      "sort": {
+        "field": "stops_per_sqkm",
+        "order": "descending"
+      },
+      "axis": {
+        "labelLimit": 150
+      }
+    },
+    "x": {
+      "field": "stops_per_sqkm",
+      "type": "quantitative",
+      "title": "Stops per square kilometre",
+      "scale": {
+        "zero": true
+      },
+      "axis": {
+        "grid": true
+      }
+    },
+    "tooltip": [
+      {
+        "field": "LGA_NAME21",
+        "type": "nominal",
+        "title": "LGA"
+      },
+      {
+        "field": "metro_density_group",
+        "type": "nominal",
+        "title": "Group"
+      },
+      {
+        "field": "stops_count",
+        "type": "quantitative",
+        "title": "Stops",
+        "format": ",.0f"
+      },
+      {
+        "field": "AREASQKM21",
+        "type": "quantitative",
+        "title": "Area km\u00b2",
+        "format": ",.1f"
+      },
+      {
+        "field": "stops_per_sqkm",
+        "type": "quantitative",
+        "title": "Stops per km\u00b2",
+        "format": ".2f"
+      }
+    ]
+  },
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "gridColor": "#E8E4DB",
+      "domainColor": "#9A968D",
+      "tickColor": "#9A968D"
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif"
+    }
+  }
+}

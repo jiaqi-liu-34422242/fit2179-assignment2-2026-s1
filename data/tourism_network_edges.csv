@@ -1,0 +1,13 @@
+source_x,source_y,target_x,target_y,region,nearest_station,distance_km,access_category
+0,12,1,12,Phillip Island,Pakenham Station,49.9,Moderate
+0,11,1,11,Grampians,Ararat Station,45.1,Moderate
+0,10,1,10,Great Ocean Road,Colac Railway Station,41.2,Moderate
+0,9,1,9,High Country,Benalla Railway Station,35.8,Moderate
+0,8,1,8,Mornington Peninsula,Dandenong Station,30.3,Moderate
+0,7,1,7,Yarra Valley and Dandenong Ranges,Clayton Station,29.5,Moderate
+0,6,1,6,Daylesford and Macedon Ranges,Creswick Railway Station,24.6,Moderate
+0,5,1,5,Gippsland,Rosedale Railway Station,4.9,Good
+0,4,1,4,Murray,Echuca Railway Station,1.3,Good
+0,3,1,3,Goldfields,Ballarat Railway Station,0.9,Good
+0,2,1,2,Geelong and the Bellarine,Geelong Railway Station ,0.8,Good
+0,1,1,1,Melbourne,Flinders Street Railway Station,0.6,Good

@@ -1,0 +1,64 @@
+trippurp,mode_group,weighted_trips,percentage
+Accompany Someone,Active transport,176435.023321739,12.81
+Accompany Someone,Car,1191568.228239777,86.49
+Accompany Someone,Other motorised,2917.27157426,0.21
+Accompany Someone,Public transport,6735.780872784,0.49
+At Home,Active transport,3565.634314766,79.85
+At Home,Car,629.865365771,14.11
+At Home,Public transport,269.83263544,6.04
+Buy Something,Active transport,585125.834723599,15.34
+Buy Something,Car,3112731.375151928,81.63
+Buy Something,Other,169.152567413,0.0
+Buy Something,Other motorised,10840.725112449,0.28
+Buy Something,Public transport,104401.606821295,2.74
+Change Mode,Active transport,5340.062317947,20.53
+Change Mode,Car,17042.280684668,65.51
+Change Mode,Other,3410.777757978,13.11
+Change Mode,Other motorised,221.955209266,0.85
+Education,Active transport,255461.784390681,25.16
+Education,Car,550136.454110626,54.18
+Education,Other,3216.6005071970003,0.32
+Education,Other motorised,917.335885638,0.09
+Education,Public transport,147459.678152501,14.52
+Education,School transport,58258.886068695,5.74
+Other Purpose,Active transport,7832.649305498,6.7
+Other Purpose,Car,102296.034350882,87.57
+Other Purpose,Other motorised,569.9385465,0.49
+Other Purpose,Public transport,4055.2076643990004,3.47
+Other Purpose,School transport,2065.649726874,1.77
+Personal Business,Active transport,585925.600305658,30.04
+Personal Business,Car,1272577.290895525,65.25
+Personal Business,Other,1173.962082092,0.06
+Personal Business,Other motorised,10893.464694638,0.56
+Personal Business,Public transport,74818.550083486,3.84
+Personal Business,School transport,4876.458675813,0.25
+Pick-up or Deliver Something,Active transport,57506.724376122,16.6
+Pick-up or Deliver Something,Car,282301.235819875,81.5
+Pick-up or Deliver Something,Other,774.343698769,0.22
+Pick-up or Deliver Something,Other motorised,869.651573312,0.25
+Pick-up or Deliver Something,Public transport,4947.645718858,1.43
+Pick-up or Drop-off Someone,Active transport,135197.888193428,7.01
+Pick-up or Drop-off Someone,Car,1772315.289134758,91.87
+Pick-up or Drop-off Someone,Public transport,20891.711491362,1.08
+Pick-up or Drop-off Someone,School transport,756.361403304,0.04
+Recreational,Active transport,712893.882916415,39.31
+Recreational,Car,1040806.153417538,57.39
+Recreational,Other,1312.2089679590001,0.07
+Recreational,Other motorised,11679.275644434,0.64
+Recreational,Public transport,44829.023760251,2.47
+Recreational,School transport,2029.51181041,0.11
+Social,Active transport,494739.966879773,19.42
+Social,Car,1891655.402124701,74.27
+Social,Other,6509.656213486,0.26
+Social,Other motorised,29386.250714582002,1.15
+Social,Public transport,124722.271916783,4.9
+Unknown Purpose (at start of day),Car,34356.654518475996,83.15
+Unknown Purpose (at start of day),Other,1004.019482497,2.43
+Unknown Purpose (at start of day),Public transport,5479.972282348,13.26
+Unknown Purpose (at start of day),School transport,476.65318588,1.15
+Work Related,Active transport,232799.130516428,8.37
+Work Related,Car,2173798.533949403,78.12
+Work Related,Other,5751.578108679,0.21
+Work Related,Other motorised,34522.202877587,1.24
+Work Related,Public transport,324825.889064368,11.67
+Work Related,School transport,10937.722152465,0.39

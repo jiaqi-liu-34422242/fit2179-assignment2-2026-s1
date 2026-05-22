@@ -1,0 +1,196 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": "container",
+  "height": 380,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "transparent",
+  "data": {
+    "url": "data/monthly_patronage_long.csv"
+  },
+  "transform": [
+    {
+      "filter": "indexof(['Metropolitan train','Metropolitan tram','Metropolitan bus','Regional train'], datum.mode) >= 0"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.2,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": "Month",
+          "axis": {
+            "format": "%Y",
+            "labelAngle": 0,
+            "grid": false
+          }
+        },
+        "y": {
+          "field": "patronage_millions",
+          "type": "quantitative",
+          "title": "Monthly patronage (millions)",
+          "axis": {
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "mode",
+          "type": "nominal",
+          "title": "Mode",
+          "scale": {
+            "domain": [
+              "Metropolitan train",
+              "Metropolitan tram",
+              "Metropolitan bus",
+              "Regional train"
+            ],
+            "range": [
+              "#004B87",
+              "#78BE20",
+              "#F58220",
+              "#7B2D8E"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Month name",
+            "type": "nominal",
+            "title": "Month"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "mode",
+            "type": "nominal",
+            "title": "Mode"
+          },
+          {
+            "field": "patronage_millions",
+            "type": "quantitative",
+            "title": "Patronage (millions)",
+            "format": ".2f"
+          },
+          {
+            "field": "patronage",
+            "type": "quantitative",
+            "title": "Patronage",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "date": "2020-04-01",
+            "label": "2020 disruption"
+          },
+          {
+            "date": "2021-10-01",
+            "label": "reopening period"
+          },
+          {
+            "date": "2023-03-01",
+            "label": "fare policy shift"
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "stroke": "#9A968D",
+        "strokeDash": [
+          4,
+          4
+        ],
+        "opacity": 0.55
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "date": "2020-04-01",
+            "patronage_millions": 24,
+            "label": "2020 disruption"
+          },
+          {
+            "date": "2021-10-01",
+            "patronage_millions": 22,
+            "label": "reopening"
+          },
+          {
+            "date": "2023-03-01",
+            "patronage_millions": 20,
+            "label": "fare shift"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "angle": 270,
+        "align": "right",
+        "baseline": "middle",
+        "dx": -4,
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 10,
+        "color": "#5F5A52"
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal"
+        },
+        "y": {
+          "field": "patronage_millions",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "gridColor": "#E8E4DB",
+      "domainColor": "#9A968D",
+      "tickColor": "#9A968D"
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom",
+      "direction": "horizontal"
+    }
+  }
+}

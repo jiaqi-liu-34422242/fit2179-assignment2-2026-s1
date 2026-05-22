@@ -1,0 +1,121 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": "container",
+  "height": 360,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "transparent",
+  "data": {
+    "url": "data/vista_purpose.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.trippurp != 'At Home' && datum.trippurp != 'Change Mode' && datum.trippurp != 'Unknown Purpose (at start of day)' && datum.trippurp != 'Other Purpose'"
+    },
+    {
+      "filter": "indexof(['Public transport','School transport','Car','Active transport','Other motorised','Other'], datum.mode_group) >= 0"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "stroke": "#F6F5F0",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "mode_group",
+      "type": "nominal",
+      "title": "Mode group",
+      "sort": [
+        "Public transport",
+        "School transport",
+        "Car",
+        "Active transport",
+        "Other motorised",
+        "Other"
+      ],
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "trippurp",
+      "type": "nominal",
+      "title": "Trip purpose",
+      "sort": [
+        "Work Related",
+        "Education",
+        "Social",
+        "Recreational",
+        "Buy Something",
+        "Personal Business",
+        "Accompany Someone",
+        "Pick-up or Drop-off Someone",
+        "Pick-up or Deliver Something"
+      ]
+    },
+    "color": {
+      "field": "percentage",
+      "type": "quantitative",
+      "title": "Trip share (%)",
+      "scale": {
+        "scheme": "blues"
+      },
+      "legend": {
+        "orient": "right"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "trippurp",
+        "type": "nominal",
+        "title": "Trip purpose"
+      },
+      {
+        "field": "mode_group",
+        "type": "nominal",
+        "title": "Mode group"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "title": "Trip share (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "weighted_trips",
+        "type": "quantitative",
+        "title": "Weighted trips",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "gridColor": "#E8E4DB",
+      "domainColor": "#9A968D",
+      "tickColor": "#9A968D",
+      "labelColor": "#1B1B1B",
+      "titleColor": "#1B1B1B"
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom",
+      "direction": "horizontal"
+    }
+  }
+}

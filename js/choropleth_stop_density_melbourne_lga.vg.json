@@ -1,0 +1,86 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": "container",
+  "height": 460,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "transparent",
+  "projection": {
+    "type": "equirectangular",
+    "center": [
+      145.1,
+      -37.88
+    ],
+    "scale": 18000
+  },
+  "data": {
+    "url": "data/melbourne_lga_stop_density.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "LGA_2021_AUST_GDA2020"
+    }
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#F6F5F0",
+    "strokeWidth": 0.8
+  },
+  "encoding": {
+    "color": {
+      "field": "properties.stops_per_sqkm",
+      "type": "quantitative",
+      "title": "Stops per km\u00b2",
+      "scale": {
+        "scheme": "blues"
+      },
+      "legend": {
+        "orient": "right",
+        "gradientLength": 220
+      }
+    },
+    "tooltip": [
+      {
+        "field": "properties.LGA_NAME21",
+        "type": "nominal",
+        "title": "LGA"
+      },
+      {
+        "field": "properties.stops_count",
+        "type": "quantitative",
+        "title": "Stops",
+        "format": ",.0f"
+      },
+      {
+        "field": "properties.AREASQKM21",
+        "type": "quantitative",
+        "title": "Area km\u00b2",
+        "format": ",.1f"
+      },
+      {
+        "field": "properties.stops_per_sqkm",
+        "type": "quantitative",
+        "title": "Stops per km\u00b2",
+        "format": ".2f"
+      }
+    ]
+  },
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif"
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

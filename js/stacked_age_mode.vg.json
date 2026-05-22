@@ -1,0 +1,185 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": "container",
+  "height": 360,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "transparent",
+  "data": {
+    "url": "data/vista_age_mode.csv"
+  },
+  "transform": [
+    {
+      "filter": "indexof(['Public transport','School transport','Car','Active transport','Other motorised','Other'], datum.mode_group) >= 0"
+    },
+    {
+      "calculate": "datum.mode_group == 'Public transport' ? 1 : datum.mode_group == 'School transport' ? 2 : datum.mode_group == 'Car' ? 3 : datum.mode_group == 'Active transport' ? 4 : datum.mode_group == 'Other motorised' ? 5 : 6",
+      "as": "mode_order"
+    },
+    {
+      "window": [
+        {
+          "op": "sum",
+          "field": "percentage",
+          "as": "x_end"
+        }
+      ],
+      "groupby": [
+        "agegroup"
+      ],
+      "sort": [
+        {
+          "field": "mode_order",
+          "order": "ascending"
+        }
+      ],
+      "frame": [
+        null,
+        0
+      ]
+    },
+    {
+      "calculate": "datum.x_end - datum.percentage",
+      "as": "x_start"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "height": {
+      "band": 0.86
+    }
+  },
+  "encoding": {
+    "y": {
+      "field": "agegroup",
+      "type": "ordinal",
+      "title": "Age group",
+      "sort": [
+        "0->4",
+        "5->9",
+        "10->14",
+        "15->19",
+        "20->24",
+        "25->29",
+        "30->34",
+        "35->39",
+        "40->44",
+        "45->49",
+        "50->54",
+        "55->59",
+        "60->64",
+        "65->69",
+        "70->74",
+        "75->79",
+        "80->84",
+        "85->89",
+        "90->94"
+      ]
+    },
+    "x": {
+      "field": "x_start",
+      "type": "quantitative",
+      "title": "Share of trips within age group (%)",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      },
+      "axis": {
+        "grid": true,
+        "values": [
+          0,
+          25,
+          50,
+          75,
+          100
+        ],
+        "labelExpr": "datum.value + '%'"
+      }
+    },
+    "x2": {
+      "field": "x_end"
+    },
+    "color": {
+      "field": "mode_group",
+      "type": "nominal",
+      "title": "Mode group",
+      "scale": {
+        "domain": [
+          "Public transport",
+          "School transport",
+          "Car",
+          "Active transport",
+          "Other motorised",
+          "Other"
+        ],
+        "range": [
+          "#004B87",
+          "#D59A00",
+          "#B8B4AA",
+          "#78BE20",
+          "#F58220",
+          "#D8D8D8"
+        ]
+      }
+    },
+    "order": {
+      "field": "mode_order",
+      "type": "quantitative",
+      "sort": "ascending"
+    },
+    "tooltip": [
+      {
+        "field": "agegroup",
+        "type": "ordinal",
+        "title": "Age group"
+      },
+      {
+        "field": "mode_group",
+        "type": "nominal",
+        "title": "Mode group"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "title": "Share (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "weighted_trips",
+        "type": "quantitative",
+        "title": "Weighted trips",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "gridColor": "#E8E4DB",
+      "domainColor": "#9A968D",
+      "tickColor": "#9A968D",
+      "labelColor": "#1B1B1B",
+      "titleColor": "#1B1B1B"
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom",
+      "direction": "horizontal"
+    }
+  }
+}

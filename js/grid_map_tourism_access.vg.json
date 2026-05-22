@@ -1,0 +1,213 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": 500,
+  "height": 360,
+  "background": "transparent",
+  "data": {
+    "url": "data/tourism_region_access.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 6,
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "x_pos",
+          "type": "ordinal",
+          "title": null,
+          "sort": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "axis": null
+        },
+        "y": {
+          "field": "y_pos",
+          "type": "ordinal",
+          "title": null,
+          "sort": [
+            1,
+            2,
+            3
+          ],
+          "axis": null
+        },
+        "color": {
+          "field": "distance_km",
+          "type": "quantitative",
+          "title": "Nearest-station distance (km)",
+          "scale": {
+            "scheme": "oranges"
+          },
+          "legend": {
+            "orient": "right"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "region",
+            "type": "nominal",
+            "title": "Tourism region"
+          },
+          {
+            "field": "nearest_station",
+            "type": "nominal",
+            "title": "Nearest station"
+          },
+          {
+            "field": "distance_km",
+            "type": "quantitative",
+            "title": "Distance (km)",
+            "format": ".1f"
+          },
+          {
+            "field": "access_category",
+            "type": "nominal",
+            "title": "Access category"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "color": "#3F3F3F",
+        "dy": -10
+      },
+      "encoding": {
+        "x": {
+          "field": "x_pos",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "axis": null
+        },
+        "y": {
+          "field": "y_pos",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3
+          ],
+          "axis": null
+        },
+        "text": {
+          "field": "region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#3F3F3F",
+        "dy": 12
+      },
+      "encoding": {
+        "x": {
+          "field": "x_pos",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "axis": null
+        },
+        "y": {
+          "field": "y_pos",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3
+          ],
+          "axis": null
+        },
+        "text": {
+          "field": "distance_label",
+          "type": "nominal"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.distance_km + ' km'",
+          "as": "distance_label"
+        }
+      ]
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 10,
+        "color": "#666",
+        "dy": 24
+      },
+      "encoding": {
+        "x": {
+          "field": "x_pos",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "axis": null
+        },
+        "y": {
+          "field": "y_pos",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3
+          ],
+          "axis": null
+        },
+        "text": {
+          "field": "access_category",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

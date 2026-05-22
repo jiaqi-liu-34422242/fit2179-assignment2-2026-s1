@@ -1,0 +1,139 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": 520,
+  "height": 360,
+  "background": "transparent",
+  "data": {
+    "url": "data/tourism_region_access.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative",
+          "title": "Distance to nearest regional train station (km)",
+          "axis": {
+            "grid": true,
+            "gridColor": "#E8E4DB"
+          }
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative",
+          "title": "Regional train stations within 50 km",
+          "axis": {
+            "grid": true,
+            "gridColor": "#E8E4DB"
+          }
+        },
+        "size": {
+          "field": "stations_within_100km",
+          "type": "quantitative",
+          "title": "Stations within 100 km",
+          "scale": {
+            "range": [
+              80,
+              1800
+            ]
+          }
+        },
+        "color": {
+          "field": "access_category",
+          "type": "nominal",
+          "title": "Rail access",
+          "scale": {
+            "domain": [
+              "Good",
+              "Moderate",
+              "Limited"
+            ],
+            "range": [
+              "#2E7D32",
+              "#D59A00",
+              "#C62828"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "region",
+            "type": "nominal",
+            "title": "Tourism region"
+          },
+          {
+            "field": "distance_km",
+            "type": "quantitative",
+            "title": "Nearest-station distance (km)",
+            "format": ".1f"
+          },
+          {
+            "field": "stations_within_50km",
+            "type": "quantitative",
+            "title": "Stations within 50 km"
+          },
+          {
+            "field": "stations_within_100km",
+            "type": "quantitative",
+            "title": "Stations within 100 km"
+          },
+          {
+            "field": "access_category",
+            "type": "nominal",
+            "title": "Rail access"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 10,
+        "dx": 7,
+        "dy": -6,
+        "align": "left",
+        "color": "#3F3F3F"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "region",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

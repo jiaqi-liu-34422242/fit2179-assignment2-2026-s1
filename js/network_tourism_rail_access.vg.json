@@ -1,0 +1,291 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": 700,
+  "height": 420,
+  "background": "transparent",
+  "layer": [
+    {
+      "data": {
+        "url": "data/tourism_network_edges.csv"
+      },
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2.2,
+        "opacity": 0.85
+      },
+      "encoding": {
+        "x": {
+          "field": "source_x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.05,
+              1.05
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "source_y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0.5,
+              12.5
+            ]
+          },
+          "axis": null
+        },
+        "x2": {
+          "field": "target_x"
+        },
+        "y2": {
+          "field": "target_y"
+        },
+        "color": {
+          "field": "access_category",
+          "type": "nominal",
+          "title": "Rail access",
+          "scale": {
+            "domain": [
+              "Good",
+              "Moderate",
+              "Limited"
+            ],
+            "range": [
+              "#2E7D32",
+              "#D59A00",
+              "#C62828"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "region",
+            "type": "nominal",
+            "title": "Tourism region"
+          },
+          {
+            "field": "nearest_station",
+            "type": "nominal",
+            "title": "Nearest regional train station"
+          },
+          {
+            "field": "distance_km",
+            "type": "quantitative",
+            "title": "Distance (km)",
+            "format": ".1f"
+          },
+          {
+            "field": "access_category",
+            "type": "nominal",
+            "title": "Rail access"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/tourism_network_nodes.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.node_type === 'Tourism region'"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "filled": true,
+        "size": 180,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "x_pos",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.05,
+              1.05
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y_pos",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0.5,
+              12.5
+            ]
+          },
+          "axis": null
+        },
+        "color": {
+          "value": "#004B87"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/tourism_network_nodes.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.x_pos == 0"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 11,
+        "baseline": "middle",
+        "color": "#333",
+        "dx": -10,
+        "align": "right"
+      },
+      "encoding": {
+        "x": {
+          "field": "x_pos",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.05,
+              1.05
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y_pos",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              12.8,
+              0.2
+            ]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/tourism_network_nodes.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.x_pos == 1"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 11,
+        "baseline": "middle",
+        "color": "#333",
+        "dx": 10,
+        "align": "left"
+      },
+      "encoding": {
+        "x": {
+          "field": "x_pos",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.05,
+              1.05
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y_pos",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              12.8,
+              0.2
+            ]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 0,
+            "y": 12.9,
+            "label": "Tourism regions"
+          },
+          {
+            "x": 1,
+            "y": 12.9,
+            "label": "Nearest regional train stations"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontWeight": "bold",
+        "fontSize": 12,
+        "align": "center",
+        "baseline": "bottom",
+        "color": "#3F3F3F"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.05,
+              1.05
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0.5,
+              12.9
+            ]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom",
+      "direction": "horizontal"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+region,longitude,latitude,grid_col,grid_row,x_pos,y_pos,nearest_station,station_longitude,station_latitude,distance_km,access_category,stations_within_50km,stations_within_100km
+Melbourne,144.9631,-37.8136,1,1,1,1,Flinders Street Railway Station,144.966964,-37.818305,0.6,Good,61,116
+Yarra Valley and Dandenong Ranges,145.374,-37.75,2,1,2,1,Clayton Station,145.1207883333333,-37.924686666666666,29.5,Moderate,41,114
+Mornington Peninsula,145.0385,-38.227,3,1,3,1,Dandenong Station,145.20980874999998,-37.990050249999996,30.3,Moderate,22,107
+Phillip Island,145.234,-38.4835,4,1,4,1,Pakenham Station,145.486368,-38.080614,49.9,Moderate,2,79
+Geelong and the Bellarine,144.3617,-38.1499,1,2,1,2,Geelong Railway Station ,144.354915,-38.144709,0.8,Good,24,99
+Great Ocean Road,143.3917,-38.6806,2,2,2,2,Colac Railway Station,143.586653,-38.343378,41.2,Moderate,2,18
+Daylesford and Macedon Ranges,144.145,-37.34,3,2,3,2,Creswick Railway Station,143.888124,-37.424605,24.6,Moderate,30,122
+Goldfields,143.8503,-37.5622,4,2,4,2,Ballarat Railway Station,143.859457,-37.558791,0.9,Good,14,101
+Grampians,142.5195,-37.05,1,3,1,3,Ararat Station,142.936914,-37.282205,45.1,Moderate,2,4
+Murray,144.75,-36.12,2,3,2,3,Echuca Railway Station,144.753459,-36.130982,1.3,Good,6,36
+High Country,146.32,-36.72,3,3,3,3,Benalla Railway Station,145.983915,-36.54455,35.8,Moderate,4,24
+Gippsland,146.785,-38.2,4,3,4,3,Rosedale Railway Station,146.786966,-38.156404,4.9,Good,12,28

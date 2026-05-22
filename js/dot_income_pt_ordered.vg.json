@@ -1,0 +1,124 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": "container",
+  "height": 360,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "transparent",
+  "data": {
+    "url": "data/vista_income_mode.csv"
+  },
+  "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 85,
+    "color": "#004B87",
+    "opacity": 0.88
+  },
+  "encoding": {
+    "y": {
+      "field": "income_band",
+      "type": "ordinal",
+      "title": "Personal income band",
+      "sort": [
+        "Negative income",
+        "Nil income",
+        "$1-$149 ($1-$7,799)",
+        "$150-$299 ($7,800-$15,599)",
+        "$300-$399 ($15,600-$20,799)",
+        "$400-$499 ($20,800-$25,999)",
+        "$500-$649 ($26,000-$33,799)",
+        "$650-$799 ($33,800-$41,599)",
+        "$800-$999 ($41,600-$51,999)",
+        "$1,000-$1,249 ($52,000-$64,999)",
+        "$1,250-$1,499 ($65,000-$77,999)",
+        "$1,500-$1,749 ($78,000-$90,999)",
+        "$1,750-$1,999 ($91,000-$103,999)",
+        "$2,000-$2,999 ($104,000-$155,999)",
+        "$3,000-$3,499 ($156,000-$181,999)"
+      ],
+      "axis": {
+        "labelLimit": 260
+      }
+    },
+    "x": {
+      "field": "pt_share_percent",
+      "type": "quantitative",
+      "title": "Public transport share of trips (%)",
+      "scale": {
+        "domain": [
+          0,
+          16
+        ],
+        "zero": true
+      },
+      "axis": {
+        "grid": true,
+        "values": [
+          0,
+          2,
+          4,
+          6,
+          8,
+          10,
+          12,
+          14,
+          16
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "income_band",
+        "type": "ordinal",
+        "title": "Income band"
+      },
+      {
+        "field": "pt_share_percent",
+        "type": "quantitative",
+        "title": "Public transport share (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "public_transport_trips",
+        "type": "quantitative",
+        "title": "Weighted PT trips",
+        "format": ",.0f"
+      },
+      {
+        "field": "total_weighted_trips",
+        "type": "quantitative",
+        "title": "Total weighted trips",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "gridColor": "#E8E4DB",
+      "domainColor": "#9A968D",
+      "tickColor": "#9A968D",
+      "labelColor": "#1B1B1B",
+      "titleColor": "#1B1B1B"
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "orient": "bottom",
+      "direction": "horizontal"
+    }
+  }
+}
