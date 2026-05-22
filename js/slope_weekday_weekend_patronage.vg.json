@@ -1,0 +1,153 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": null,
+  "width": "container",
+  "height": 340,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "transparent",
+  "data": {
+    "url": "data/weekday_weekend_patronage_2025.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "Day_type",
+      "type": "ordinal",
+      "title": null,
+      "sort": [
+        "Normal Weekday",
+        "Weekend"
+      ],
+      "axis": {
+        "labelAngle": 0,
+        "labelFontWeight": 600,
+        "domain": false,
+        "tickSize": 0
+      }
+    },
+    "y": {
+      "field": "avg_daily_patronage_thousands",
+      "type": "quantitative",
+      "title": "Average daily patronage (thousands)",
+      "scale": {
+        "zero": true
+      },
+      "axis": {
+        "grid": true
+      }
+    },
+    "color": {
+      "field": "mode_label",
+      "type": "nominal",
+      "title": "Mode",
+      "scale": {
+        "domain": [
+          "Metro train",
+          "Tram",
+          "Metro bus",
+          "Regional train",
+          "Regional bus"
+        ],
+        "range": [
+          "#004B87",
+          "#78BE20",
+          "#F58220",
+          "#7B2D8E",
+          "#5B6770"
+        ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "mode_label",
+        "type": "nominal",
+        "title": "Mode"
+      },
+      {
+        "field": "Day_type",
+        "type": "nominal",
+        "title": "Day type"
+      },
+      {
+        "field": "avg_daily_patronage",
+        "type": "quantitative",
+        "title": "Average daily patronage",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "detail": {
+          "field": "mode_label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 105,
+        "stroke": "#F6F5F0",
+        "strokeWidth": 1.5
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.Day_type == 'Weekend'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 10,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "text": {
+          "field": "mode_label",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Source Sans 3, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "gridColor": "#E8E4DB",
+      "domainColor": "#9A968D",
+      "tickColor": "#9A968D",
+      "labelColor": "#1B1B1B",
+      "titleColor": "#1B1B1B"
+    },
+    "legend": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

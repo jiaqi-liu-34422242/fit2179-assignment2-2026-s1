@@ -1,0 +1,210 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 430,
+  "height": 330,
+  "padding": {
+    "left": 8,
+    "right": 8,
+    "top": 8,
+    "bottom": 8
+  },
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "transparent",
+  "data": [
+    {
+      "name": "cells",
+      "values": [
+        {}
+      ],
+      "transform": [
+        {
+          "type": "sequence",
+          "start": 0,
+          "stop": 100,
+          "as": "cell"
+        },
+        {
+          "type": "formula",
+          "as": "mode_group",
+          "expr": "datum.cell < 83 ? 'Bus' : datum.cell < 92 ? 'Train' : datum.cell < 97 ? 'Tram' : 'Regional'"
+        },
+        {
+          "type": "formula",
+          "as": "stops",
+          "expr": "datum.mode_group == 'Bus' ? 25794 : datum.mode_group == 'Train' ? 2869 : datum.mode_group == 'Tram' ? 1638 : 869"
+        },
+        {
+          "type": "formula",
+          "as": "share",
+          "expr": "datum.stops / 31170"
+        },
+        {
+          "type": "formula",
+          "as": "col",
+          "expr": "datum.cell % 10"
+        },
+        {
+          "type": "formula",
+          "as": "row",
+          "expr": "9 - floor(datum.cell / 10)"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "band",
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "range": [
+        0,
+        265
+      ],
+      "padding": 0.12
+    },
+    {
+      "name": "y",
+      "type": "band",
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "range": [
+        265,
+        0
+      ],
+      "padding": 0.12
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Bus",
+        "Train",
+        "Tram",
+        "Regional"
+      ],
+      "range": [
+        "#F58220",
+        "#004B87",
+        "#78BE20",
+        "#7B2D8E"
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "title": "Mode group",
+      "orient": "right",
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "symbolType": "square",
+      "encode": {
+        "symbols": {
+          "update": {
+            "size": {
+              "value": 110
+            }
+          }
+        }
+      }
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "cells"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "x",
+            "field": "col"
+          },
+          "y": {
+            "scale": "y",
+            "field": "row"
+          },
+          "width": {
+            "scale": "x",
+            "band": 1
+          },
+          "height": {
+            "scale": "y",
+            "band": 1
+          },
+          "cornerRadius": {
+            "value": 2
+          },
+          "fill": {
+            "scale": "color",
+            "field": "mode_group"
+          },
+          "stroke": {
+            "value": "#F6F5F0"
+          },
+          "strokeWidth": {
+            "value": 1.2
+          },
+          "tooltip": {
+            "signal": "{'Mode group': datum.mode_group, 'Approximate share': format(datum.share, '.1%'), 'Stops': format(datum.stops, ',')}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 132
+          },
+          "y": {
+            "value": 292
+          },
+          "align": {
+            "value": "center"
+          },
+          "font": {
+            "value": "Source Sans 3, sans-serif"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#4A4A4A"
+          },
+          "text": {
+            "value": "Each cell represents about 1% of public transport stops"
+          }
+        }
+      }
+    }
+  ]
+}

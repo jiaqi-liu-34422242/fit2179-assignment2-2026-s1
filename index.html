@@ -139,10 +139,11 @@
        GRID
        ============================================================ */
     .row          { display: grid; gap: var(--gutter); align-items: start; }
-    .row--2       { grid-template-columns: 1fr 1fr; }
-    .row--3       { grid-template-columns: 1fr 1fr 1fr; }
-    .row--2-1     { grid-template-columns: 2fr 1fr; }
-    .row--1-2     { grid-template-columns: 1fr 2fr; }
+    .row > *      { min-width: 0; }
+    .row--2       { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .row--3       { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .row--2-1     { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+    .row--1-2     { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
 
     @media (max-width: 820px) {
       .row--2, .row--3, .row--2-1, .row--1-2 {
@@ -187,7 +188,7 @@
     }
 
     .narrative {
-      max-width: 580px;
+      max-width: 38rem;
     }
     .narrative p + p { margin-top: 1em; }
 
@@ -200,6 +201,7 @@
       font-size: var(--fs-body);
       color: var(--clr-text);
     }
+    .row > .callout { margin-top: 0; }
 
     .t-train    { color: var(--clr-train);    font-weight: 600; }
     .t-tram     { color: var(--clr-tram);     font-weight: 600; }
@@ -265,19 +267,28 @@
     <p class="chart__source">Source: Transport Victoria Open Data, 2024</p>
   </div>
 
-  <!-- Vis 2 & 3: Bar chart + Melbourne detail side by side -->
+  <!-- Vis 2: Mode composition -->
   <div class="row row--2">
     <div class="chart">
-      <h3 class="chart__title">Stops by Transport Mode</h3>
-      <p class="chart__subtitle">Total number of stops for each mode across Victoria.</p>
-      <div class="chart__vis" id="bar_mode_distribution" style="min-height:360px;"></div>
+      <h3 class="chart__title">Transport Mode Composition across Victoria</h3>
+      <p class="chart__subtitle">
+        Waffle chart: 100 equal-sized cells show the approximate percentage of stops
+        belonging to each transport mode group.
+      </p>
+      <div class="chart__vis" id="waffle_mode_distribution" style="min-height:360px;"></div>
       <p class="chart__source">Source: Transport Victoria Open Data, 2024</p>
     </div>
-    <div class="chart">
-      <h3 class="chart__title">Melbourne — Detail</h3>
-      <p class="chart__subtitle">Zoomed view of the metropolitan area.</p>
-      <div class="chart__vis" id="map_melbourne" style="min-height:360px;"></div>
-      <p class="chart__source">Source: Transport Victoria Open Data, 2024</p>
+    <div class="narrative">
+      <p>
+        The state map establishes the spatial pattern first: public transport stops
+        spread across Victoria, but the densest concentration is visible around
+        metropolitan Melbourne. The composition view then changes the task from
+        geography to part-to-whole comparison.
+      </p>
+      <div class="callout">
+        Melbourne coverage is examined separately in Section 03 using LGA stop density,
+        so this opening section keeps only one stop-location map.
+      </div>
     </div>
   </div>
   </section>
@@ -326,14 +337,20 @@
       </div>
     </div>
 
-    <div class="narrative" style="margin-top:0.5rem;">
-      <p>
-        The heat map shows how mode choice changes across trip purposes.
-        The 100% stacked bars then compare travel composition across age groups,
-        while the dot plot treats income as an ordered category rather than
-        sorting it by value. Together, these charts show transport dependency
-        without mixing up categorical hue and quantitative colour luminance.
-      </p>
+    <div class="row row--2">
+      <div class="narrative">
+        <p>
+          Together, these three charts reveal that public transport dependence
+          is not uniform. Younger travellers and lower-income households rely
+          on public transport more heavily, while commuting and education trips
+          dominate mode choice far more than shopping or social travel.
+        </p>
+      </div>
+      <div class="callout" style="align-self:start;">
+        A free-fare policy would disproportionately benefit the groups
+        already most dependent on public transport: younger residents
+        and lower-income households.
+      </div>
     </div>
   </section>
 
@@ -360,24 +377,24 @@
       <p class="chart__source">Source: Transport Victoria Open Data; ABS LGA boundaries 2021</p>
     </div>
 
-    <!-- Vis 8: Melbourne density dot plot -->
-    <div class="row row--2-1">
+    <!-- Vis 8: Melbourne density distribution -->
+    <div class="row row--2">
       <div class="chart">
-        <h3 class="chart__title">Highest and Lowest Stop Density LGAs in Melbourne</h3>
+        <h3 class="chart__title">Distribution of Stop Density across Melbourne LGAs</h3>
         <p class="chart__subtitle">
-          Dot plot: each point represents one LGA. Horizontal position on a common
-          scale encodes stops per square kilometre.
+          Histogram: binned stop-density values show whether most LGAs cluster at
+          similar coverage levels or sit far below a small group of dense inner areas.
         </p>
-        <div class="chart__vis" id="scatter_access_gap" style="min-height:380px;"></div>
+        <div class="chart__vis" id="density_distribution" style="min-height:380px;"></div>
         <p class="chart__source">Source: Derived from Transport Victoria Open Data and ABS LGA boundaries 2021</p>
       </div>
       <div class="narrative">
         <p>
           Inner LGAs such as Yarra, Melbourne, Stonnington and Port Phillip show the
           densest stop coverage because many tram, train and bus stops are packed into
-          small land areas. Outer growth LGAs such as Cardinia, Yarra Ranges and
-          Nillumbik have lower stop density because stops are spread across much larger
-          areas.
+          small land areas. The histogram complements the choropleth by showing the
+          overall distribution, rather than repeating an ordered list of high and low
+          LGAs.
         </p>
         <div class="callout">
           Stop density is a coverage indicator, not a service-quality indicator.
@@ -411,8 +428,17 @@
       <p class="chart__source">Source: Department of Transport and Planning Victoria, monthly public transport patronage by mode</p>
     </div>
 
-    <!-- Vis 10: Weekday vs weekend grouped bar chart -->
-    <div class="row row--1-2">
+    <!-- Vis 10: Weekday vs weekend slope graph -->
+    <div class="row row--2">
+      <div class="chart">
+        <h3 class="chart__title">Weekday vs Weekend Patronage</h3>
+        <p class="chart__subtitle">
+          Slope graph: each line links one mode's 2025 average weekday patronage to
+          its weekend patronage on the same quantitative scale.
+        </p>
+        <div class="chart__vis" id="slope_weekday_weekend" style="min-height:360px;"></div>
+        <p class="chart__source">Source: Department of Transport and Planning Victoria, 2025 average daily patronage</p>
+      </div>
       <div class="narrative">
         <p>
           The line chart supports trend reading: the same modes are tracked across
@@ -421,19 +447,10 @@
           as a smaller but distinct series.
         </p>
         <div class="callout">
-          The grouped bar chart changes the task from trend analysis to categorical
-          comparison. It compares average weekday and weekend patronage in 2025,
-          using bar length from a shared zero baseline.
+          The slope graph narrows the time comparison to two ordered states. It makes
+          the weekday-to-weekend change visible for each mode without introducing
+          another bar-family chart.
         </div>
-      </div>
-      <div class="chart">
-        <h3 class="chart__title">Weekday vs Weekend Patronage</h3>
-        <p class="chart__subtitle">
-          Grouped bar chart: each mode is a category, bar length encodes average daily
-          patronage, and hue separates normal weekdays from weekends.
-        </p>
-        <div class="chart__vis" id="bar_weekday_weekend" style="min-height:330px;"></div>
-        <p class="chart__source">Source: Department of Transport and Planning Victoria, 2025 average daily patronage</p>
       </div>
     </div>
   </section>
@@ -447,15 +464,6 @@
     </p>
     <div class="section__rule"></div>
 
-    <div class="chart">
-      <h3 class="chart__title">Tourism Regions and Their Nearest Regional Train Stations</h3>
-      <p class="chart__subtitle">
-        Network diagram: tourism regions and regional train stations are represented as nodes, while links show the nearest-station connection for each region.
-      </p>
-      <div class="chart__vis" id="network_tourism" style="min-height:440px;"></div>
-      <p class="chart__source">Source: Transport Victoria Open Data and tourism region centres derived for visual analysis.</p>
-    </div>
-
     <div class="row row--2">
       <div class="chart">
         <h3 class="chart__title">Rail Access Difficulty by Tourism Region</h3>
@@ -467,7 +475,10 @@
       </div>
       <div class="narrative">
         <p>
-          The network diagram reveals the nearest-station dependency structure, while the grid map removes differences in region size so access difficulty can be compared more fairly across all tourism regions.
+          The grid map removes differences in region size and map-label crowding so rail
+          access difficulty can be compared across tourism regions using the same visual
+          unit. It focuses on the measured access gap rather than implying passenger
+          flows that the data does not contain.
         </p>
         <div class="callout">
           Regions with long distances to the nearest train station may still attract visitors, but they place a heavier burden on car travel or last-mile transport.
