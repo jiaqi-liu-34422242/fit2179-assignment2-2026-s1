@@ -19,4 +19,4 @@ vegaEmbed("#slope_weekday_weekend", "js/slope_weekday_weekend_patronage.vg.json"
 // Section 5
 vegaEmbed("#grid_tourism_access", "js/grid_map_tourism_access.vg.json", { actions: false });
 vegaEmbed("#area_tourism_demand", "js/stacked_area_tourism_demand.vg.json", { actions: false });
-vegaEmbed("#bubble_tourism", "js/bubble_tourism_rail_access.vg.json", { actions: false, renderer: "svg" });
+vegaEmbed("#bubble_tourism", "js/bubble_tourism_rail_access.vg.json?v=5", { actions: false, renderer: "svg" });
