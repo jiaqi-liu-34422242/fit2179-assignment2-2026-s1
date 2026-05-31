@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
@@ -16,37 +16,38 @@
   <style>
 
     :root {
-      --clr-bg:            #F6F5F0;
+      --clr-bg:            #F7F8F5;
       --clr-surface:       #FFFFFF;
-      --clr-text:          #1B1B1B;
-      --clr-text-mid:      #4A4A4A;
-      --clr-text-light:    #767676;
-      --clr-accent:        #004B87;
-      --clr-accent-soft:   #E4EEF6;
-      --clr-rule:          #D2D0C9;
+      --clr-text:          #202628;
+      --clr-text-mid:      #4B5556;
+      --clr-text-light:    #687274;
+      --clr-accent:        #2B5964;
+      --clr-accent-soft:   #EAF2F1;
+      --clr-rule:          #DADFDB;
+      --clr-warm:          #A35D2B;
 
-      --clr-train:         #004B87;
-      --clr-tram:          #78BE20;
-      --clr-bus:           #F58220;
-      --clr-regional:      #7B2D8E;
+      --clr-train:         #2E6F8E;
+      --clr-tram:          #3C7D50;
+      --clr-bus:           #A35D2B;
+      --clr-regional:      #765A8B;
 
-      --ff-display:  'Playfair Display', Georgia, 'Times New Roman', serif;
       --ff-body:     'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+      --ff-display:  var(--ff-body);
 
-      --fs-hero:       clamp(2.25rem, 4vw, 3.25rem);
-      --fs-section:    1.625rem;
+      --fs-hero:       clamp(2rem, 3.2vw, 3.05rem);
+      --fs-section:    1.55rem;
       --fs-chart:      1.125rem;
-      --fs-body:       1.0625rem;
-      --fs-caption:    0.8125rem;
-      --fs-meta:       0.75rem;
+      --fs-body:       1rem;
+      --fs-caption:    0.875rem;
+      --fs-meta:       0.8125rem;
 
       --lh-body:       1.62;
       --lh-heading:    1.18;
 
       /* --- Layout --- */
-      --page-max:      1160px;
-      --gutter:        2rem;
-      --section-space: 5rem;
+      --page-max:      1220px;
+      --gutter:        1.5rem;
+      --section-space: 2.8rem;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,51 +69,110 @@
     }
 
     .hero {
-      padding: 3.5rem 0 2.75rem;
+      position: relative;
+      overflow: hidden;
+      margin-top: 1.2rem;
+      padding: 2.35rem 1.7rem 2.05rem;
+      min-height: 360px;
+      border-top: 1px solid var(--clr-rule);
       border-bottom: 4px solid var(--clr-accent);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gutter);
+      align-items: end;
+      background:
+        linear-gradient(90deg, rgba(247,248,245,0.98) 0%, rgba(247,248,245,0.94) 38%, rgba(247,248,245,0.78) 58%, rgba(247,248,245,0.26) 78%, rgba(247,248,245,0.06) 100%),
+        linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(43,89,100,0.16) 100%),
+        url("assets/melbourne_tram_flinders_hero.jpg") center 48% / cover no-repeat;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 55%;
+      bottom: -4px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--clr-train), var(--clr-tram), var(--clr-bus), var(--clr-regional));
+    }
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      max-width: none;
     }
     .hero__kicker {
       font-family: var(--ff-body);
       font-size: var(--fs-meta);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0;
       color: var(--clr-accent);
       margin-bottom: 0.75rem;
     }
     .hero__title {
       font-family: var(--ff-display);
       font-size: var(--fs-hero);
-      font-weight: 900;
-      line-height: var(--lh-heading);
+      font-weight: 700;
+      line-height: 1.1;
       color: var(--clr-text);
-      max-width: 780px;
+      max-width: 21ch;
     }
     .hero__subtitle {
       font-family: var(--ff-body);
-      font-size: 1.125rem;
-      font-weight: 300;
+      font-size: 1.0625rem;
+      font-weight: 400;
       line-height: 1.55;
       color: var(--clr-text-mid);
-      max-width: 600px;
-      margin-top: 1.25rem;
+      max-width: 100%;
+      margin-top: 1rem;
     }
     .hero__meta {
       font-size: var(--fs-meta);
       color: var(--clr-text-light);
-      margin-top: 1.25rem;
-      letter-spacing: 0.02em;
+      margin-top: 1rem;
+      letter-spacing: 0;
+      max-width: 100%;
     }
 
     .section {
       padding-top: var(--section-space);
+    }
+    .section__header {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gutter);
+      align-items: end;
+      margin-bottom: 0.9rem;
+    }
+    .section__header--text-only {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .section__summary {
+      align-self: stretch;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.65rem;
+      padding-top: 0.65rem;
+    }
+    .summary__item {
+      border-top: 3px solid var(--clr-accent);
+      padding-top: 0.55rem;
+      color: var(--clr-text-mid);
+      font-size: 0.875rem;
+      line-height: 1.35;
+    }
+    .summary__item strong {
+      display: block;
+      color: var(--clr-text);
+      font-size: 1.42rem;
+      line-height: 1;
+      margin-bottom: 0.25rem;
     }
     .section__label {
       font-family: var(--ff-body);
       font-size: var(--fs-meta);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0;
       color: var(--clr-accent);
     }
     .section__heading {
@@ -126,13 +186,13 @@
     .section__intro {
       font-size: var(--fs-body);
       color: var(--clr-text-mid);
-      max-width: 600px;
-      margin-bottom: 1.75rem;
+      max-width: 100%;
+      margin-bottom: 0;
     }
     .section__rule {
       height: 1px;
       background: var(--clr-rule);
-      margin-bottom: 2rem;
+      margin-bottom: 1.25rem;
     }
 
     /* ============================================================
@@ -144,14 +204,34 @@
     .row--3       { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .row--2-1     { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
     .row--1-2     { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+    .map-pair     { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 0.35rem; }
+    .map-pair .chart { margin-bottom: 0.65rem; }
+    .map-pair__source { margin: -0.1rem 0 1.45rem; }
 
     @media (max-width: 820px) {
-      .row--2, .row--3, .row--2-1, .row--1-2 {
+      .row--2, .row--3, .row--2-1, .row--1-2, .map-pair {
         grid-template-columns: 1fr;
       }
       :root {
-        --gutter: 1.25rem;
-        --section-space: 3.5rem;
+        --gutter: 1rem;
+        --section-space: 2.4rem;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+        margin-top: 0.75rem;
+        padding: 1.6rem 1rem 1.45rem;
+        min-height: 340px;
+        background:
+          linear-gradient(90deg, rgba(247,248,245,0.96) 0%, rgba(247,248,245,0.88) 62%, rgba(247,248,245,0.42) 100%),
+          url("assets/melbourne_tram_flinders_hero.jpg") center 48% / cover no-repeat;
+      }
+      .section__header,
+      .section__header--text-only {
+        grid-template-columns: 1fr;
+      }
+      .section__summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding-top: 0;
       }
     }
 
@@ -159,7 +239,7 @@
        CHART BLOCK
        ============================================================ */
     .chart {
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.45rem;
     }
     .chart__title {
       font-family: var(--ff-body);
@@ -171,8 +251,9 @@
     .chart__subtitle {
       font-size: var(--fs-caption);
       color: var(--clr-text-light);
-      margin-bottom: 0.75rem;
-      max-width: 600px;
+      margin-bottom: 0.55rem;
+      max-width: 100%;
+      line-height: 1.45;
     }
     .chart__vis {
       width: 100%;
@@ -184,21 +265,58 @@
     .chart__source {
       font-size: var(--fs-meta);
       color: var(--clr-text-light);
-      margin-top: 0.4rem;
+      margin-top: 0.25rem;
+    }
+    .section > .chart > .chart__title,
+    .section > .chart > .chart__subtitle,
+    .section > .chart > .chart__source {
+      max-width: calc((100% - var(--gutter)) / 2);
+    }
+    .row .chart__title,
+    .row .chart__subtitle,
+    .row .chart__source {
+      max-width: 100%;
     }
 
     .narrative {
-      max-width: 38rem;
+      width: 100%;
+      max-width: none;
+      color: var(--clr-text-mid);
     }
     .narrative p + p { margin-top: 1em; }
+
+    .media-card {
+      margin: 0 0 0.95rem;
+      width: 100%;
+      border: 1px solid var(--clr-rule);
+      background: var(--clr-surface);
+    }
+    .media-card img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+    .media-card figcaption {
+      padding: 0.45rem 0.6rem 0.55rem;
+      font-size: var(--fs-meta);
+      line-height: 1.4;
+      color: var(--clr-text-light);
+    }
+    .media-card a {
+      color: var(--clr-accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
 
     .callout {
       border-left: 3px solid var(--clr-accent);
       background: var(--clr-accent-soft);
-      padding: 0.85rem 1.1rem;
+      width: 100%;
+      padding: 0.72rem 0.95rem;
       border-radius: 0 4px 4px 0;
-      margin: 1.5rem 0;
-      font-size: var(--fs-body);
+      margin: 1rem 0;
+      font-size: 0.96rem;
+      line-height: 1.5;
       color: var(--clr-text);
     }
     .row > .callout { margin-top: 0; }
@@ -217,12 +335,42 @@
       color: var(--clr-text-light);
       line-height: 1.75;
     }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gutter);
+      align-items: start;
+    }
     .footer strong { color: var(--clr-text); }
     .footer p + p  { margin-top: 0.4rem; }
 
+    @media (max-width: 820px) {
+      .footer__grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
     .vega-embed { width: 100%; }
     .vega-embed .vega-actions { display: none; }
+    .chart__vis .vega-bindings {
+      order: -1;
+      margin: 0 0 0.75rem;
+      font-size: var(--fs-caption);
+      color: var(--clr-text-mid);
+    }
+    .chart__vis:has(.vega-bindings) {
+      display: flex;
+      flex-direction: column;
+    }
+    .chart__vis .vega-bind select {
+      margin-left: 0.35rem;
+      font: inherit;
+      color: var(--clr-text);
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-rule);
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+    }
   </style>
 </head>
 
@@ -230,42 +378,67 @@
 <div class="page">
 
   <header class="hero">
-    <p class="hero__kicker">FIT2179 Data Visualisation 2</p>
-    <h1 class="hero__title">
-      Victoria Public Transport:<br>
-      Who Benefits from a Free Fare Future?
-    </h1>
-    <p class="hero__subtitle">
-      Exploring where the network reaches, who depends on it most,
-      which communities are underserved, how patronage has shifted,
-      and whether tourists can travel Victoria by rail.
-    </p>
-    <p class="hero__meta">
-      Created by Jiaqi Liu&ensp;|&ensp;Student ID: 34422242&ensp;|&ensp;FIT2179 Data Visualisation 2, Monash University&ensp;|&ensp;May 2026
-    </p>
+    <div class="hero__content">
+      <p class="hero__kicker">FIT2179 Data Visualisation 2</p>
+      <h1 class="hero__title">
+        Victoria Public Transport:<br>
+        Who Benefits from a Free Fare Future?
+      </h1>
+      <p class="hero__subtitle">
+        Exploring where the network reaches, who depends on it most,
+        which communities are underserved, how patronage has shifted,
+        and whether tourists can travel Victoria by rail.
+      </p>
+      <p class="hero__meta">
+        Created by Jiaqi Liu&ensp;|&ensp;Student ID: 34422242&ensp;|&ensp;FIT2179 Data Visualisation 2, Monash University&ensp;|&ensp;May 2026
+      </p>
+    </div>
   </header>
 
   <!-- ===================== SECTION 1 — The Network ===================== -->
   <section class="section" id="s1">
-    <p class="section__label">Section 01</p>
-    <h2 class="section__heading">Where Is the Network?</h2>
-    <p class="section__intro">
-      Victoria's public transport network spans
-      <span class="t-train">train</span>,
-      <span class="t-tram">tram</span>,
-      <span class="t-bus">bus</span>, and
-      <span class="t-regional">regional coach</span> services &mdash;
-      but stops are overwhelmingly concentrated in metropolitan Melbourne.
-    </p>
+    <div class="section__header section__header--text-only">
+      <div>
+        <p class="section__label">Section 01</p>
+        <h2 class="section__heading">Where Is the Network?</h2>
+        <p class="section__intro">
+          Victoria's public transport network spans
+          <span class="t-train">train</span>,
+          <span class="t-tram">tram</span>,
+          <span class="t-bus">bus</span>, and
+          <span class="t-regional">regional coach</span> services &mdash;
+          but stops are overwhelmingly concentrated in metropolitan Melbourne.
+        </p>
+      </div>
+      <div class="section__summary" aria-label="Network summary">
+        <div class="summary__item"><strong>31k</strong>public transport stops mapped</div>
+        <div class="summary__item"><strong>4</strong>mode groups carried through the story</div>
+      </div>
+    </div>
     <div class="section__rule"></div>
 
-   <!-- Vis 1: Victoria full-width map -->
-  <div class="chart">
-    <h3 class="chart__title">Victoria — Full State</h3>
-    <p class="chart__subtitle">Each dot is one stop; colour encodes transport mode. Use the dropdown to filter by mode.</p>
-    <div class="chart__vis" id="map_victoria" style="min-height:440px;"></div>
-    <p class="chart__source">Source: Transport Victoria Open Data, 2024</p>
-  </div>
+    <!-- Vis 1: Statewide and Melbourne maps -->
+    <div class="row map-pair">
+      <div class="chart">
+        <h3 class="chart__title">Victoria - Full State</h3>
+        <p class="chart__subtitle">
+          This dot map places every public transport stop across Victoria. It shows a statewide network footprint, while the densest concentration is clearly around Melbourne.
+        </p>
+        <div class="chart__vis" id="map_victoria" style="min-height:360px;"></div>
+      </div>
+      <div class="chart">
+        <h3 class="chart__title">Melbourne - Zoom In</h3>
+        <p class="chart__subtitle">
+          This zoomed dot map separates the Melbourne cluster from the state map. It shows train, tram, and bus stops packed tightly through the inner metropolitan area.
+        </p>
+        <div class="chart__vis" id="map_melbourne" style="min-height:360px;"></div>
+      </div>
+    </div>
+    <p class="chart__source map-pair__source">
+      Source:
+      <a href="https://opendata.transport.vic.gov.au/dataset/gtfs-schedule">Transport Victoria Open Data - GTFS Schedule</a>;
+      <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files">ABS ASGS LGA boundaries 2021</a>.
+    </p>
 
   <!-- Vis 2: Mode composition -->
   <div class="row row--2">
@@ -275,15 +448,21 @@
         Waffle chart: 100 equal-sized cells show the approximate percentage of stops
         belonging to each transport mode group.
       </p>
-      <div class="chart__vis" id="waffle_mode_distribution" style="min-height:360px;"></div>
+      <div class="chart__vis" id="waffle_mode_distribution" style="min-height:300px;"></div>
       <p class="chart__source">Source: Transport Victoria Open Data, 2024</p>
     </div>
     <div class="narrative">
+      <figure class="media-card">
+        <img src="assets/flinders_station_trams.jpg" alt="Flinders Street Station with Melbourne trams in the foreground.">
+        <figcaption>
+          Melbourne tram and train interchange at Flinders Street.
+          Image: Philip Mallis / HappyWaldo,
+          <a href="https://commons.wikimedia.org/wiki/File:Flinders_Station_and_trams.jpg">Wikimedia Commons</a>, CC BY-SA 3.0.
+        </figcaption>
+      </figure>
       <p>
-        The state map establishes the spatial pattern first: public transport stops
-        spread across Victoria, but the densest concentration is visible around
-        metropolitan Melbourne. The composition view then changes the task from
-        geography to part-to-whole comparison.
+        The state map establishes the spatial pattern first. The composition view
+        then changes the task from geography to part-to-whole comparison.
       </p>
       <div class="callout">
         Melbourne coverage is examined separately in Section 03 using LGA stop density,
@@ -295,13 +474,21 @@
 
   <!-- ===================== SECTION 2 — Who Travels How ===================== -->
   <section class="section" id="s2">
-    <p class="section__label">Section 02</p>
-    <h2 class="section__heading">Who Travels How?</h2>
-    <p class="section__intro">
-      Travel behaviour varies by trip purpose, age group, and income.
-      Data from the Victorian Integrated Survey of Travel and Activity
-      (VISTA) reveals which groups depend most on public transport.
-    </p>
+    <div class="section__header">
+      <div>
+        <p class="section__label">Section 02</p>
+        <h2 class="section__heading">Who Travels How?</h2>
+        <p class="section__intro">
+          Travel behaviour varies by trip purpose, age group, and income.
+          Data from the Victorian Integrated Survey of Travel and Activity
+          (VISTA) reveals which groups depend most on public transport.
+        </p>
+      </div>
+      <div class="section__summary" aria-label="Traveller behaviour summary">
+        <div class="summary__item"><strong>9</strong>trip purposes compared by mode group</div>
+        <div class="summary__item"><strong>19</strong>age bands normalised to 100%</div>
+      </div>
+    </div>
     <div class="section__rule"></div>
 
     <!-- Vis 4: Heat map — Trip purpose × mode group -->
@@ -311,7 +498,7 @@
         Heat map: rows encode trip purposes, columns encode mode groups,
         and colour luminance encodes trip share percentage.
       </p>
-      <div class="chart__vis" id="idoim2" style="min-height:380px;"></div>
+      <div class="chart__vis" id="idoim2" style="min-height:320px;"></div>
       <p class="chart__source">Source: VISTA, Department of Transport and Planning, 2024</p>
     </div>
 
@@ -323,16 +510,16 @@
           100% stacked bar chart: each age group is normalised to 100%,
           and segment length shows each mode's share.
         </p>
-        <div class="chart__vis" id="idoim3" style="min-height:360px;"></div>
+        <div class="chart__vis" id="idoim3" style="min-height:310px;"></div>
         <p class="chart__source">Source: VISTA, 2024</p>
       </div>
       <div class="chart">
         <h3 class="chart__title">Public Transport Share by Income Band</h3>
         <p class="chart__subtitle">
-          Dot plot: each point represents one ordered income band.
-          Horizontal position on a common scale encodes public transport trip share.
+          Lollipop chart: each income band is ordered vertically, while the stem and
+          endpoint show public transport trip share on a common horizontal scale.
         </p>
-        <div class="chart__vis" id="idoim4" style="min-height:360px;"></div>
+        <div class="chart__vis" id="idoim4" style="min-height:310px;"></div>
         <p class="chart__source">Source: VISTA, 2024</p>
       </div>
     </div>
@@ -356,24 +543,33 @@
 
   <!-- ===================== SECTION 3 — Melbourne Coverage ===================== -->
   <section class="section" id="s3">
-    <p class="section__label">Section 03</p>
-    <h2 class="section__heading">Melbourne Stop Coverage</h2>
-    <p class="section__intro">
-      Because most Victorians live in metropolitan Melbourne, this section focuses on
-      stop coverage within Greater Melbourne LGAs. Stop density is used as a network
-      coverage measure: it shows where stops are spatially concentrated, but it does
-      not directly measure service frequency or demand.
-    </p>
+    <div class="section__header">
+      <div>
+        <p class="section__label">Section 03</p>
+        <h2 class="section__heading">Melbourne Stop Coverage</h2>
+        <p class="section__intro">
+          Because most Victorians live in metropolitan Melbourne, this section focuses on
+          stop coverage within Greater Melbourne LGAs. Stop density is used as a network
+          coverage measure: it shows where stops are spatially concentrated, but it does
+          not directly measure service frequency or demand.
+        </p>
+      </div>
+      <div class="section__summary" aria-label="Melbourne coverage summary">
+        <div class="summary__item"><strong>LGA</strong>boundaries support local comparison</div>
+        <div class="summary__item"><strong>km²</strong>normalisation reduces area-size bias</div>
+      </div>
+    </div>
     <div class="section__rule"></div>
 
     <!-- Vis 7: Melbourne LGA stop-density choropleth -->
     <div class="chart">
       <h3 class="chart__title">Public Transport Stop Density across Greater Melbourne</h3>
       <p class="chart__subtitle">
-        Choropleth map: each LGA polygon is shaded by stops per square kilometre.
-        Colour luminance encodes the quantitative stop-density value.
+        Choropleth map: use the mode selector to compare total, bus, train, tram,
+        or regional stop density. Hover for details, click an LGA to keep it
+        highlighted, and double-click to clear the selection.
       </p>
-      <div class="chart__vis" id="idoim5" style="min-height:480px;"></div>
+      <div class="chart__vis" id="idoim5" style="min-height:400px;"></div>
       <p class="chart__source">Source: Transport Victoria Open Data; ABS LGA boundaries 2021</p>
     </div>
 
@@ -382,10 +578,11 @@
       <div class="chart">
         <h3 class="chart__title">Distribution of Stop Density across Melbourne LGAs</h3>
         <p class="chart__subtitle">
-          Histogram: binned stop-density values show whether most LGAs cluster at
-          similar coverage levels or sit far below a small group of dense inner areas.
+          Histogram: LGAs are grouped into 5-stop density intervals to show the
+          distribution of coverage, with labels showing bin counts and a dashed
+          reference line marking the median LGA.
         </p>
-        <div class="chart__vis" id="density_distribution" style="min-height:380px;"></div>
+        <div class="chart__vis" id="density_distribution" style="min-height:310px;"></div>
         <p class="chart__source">Source: Derived from Transport Victoria Open Data and ABS LGA boundaries 2021</p>
       </div>
       <div class="narrative">
@@ -407,14 +604,22 @@
 
   <!-- ===================== SECTION 4 — Patronage Trends ===================== -->
   <section class="section" id="s4">
-    <p class="section__label">Section 04</p>
-    <h2 class="section__heading">Patronage over Time</h2>
-    <p class="section__intro">
-      Patronage data shows how public transport demand changed after major disruptions
-      and how weekday travel still differs from weekend travel. This section uses time
-      as the main structure, so the chart choices follow the course-note distinction
-      between ordered trends and categorical comparison.
-    </p>
+    <div class="section__header section__header--text-only">
+      <div>
+        <p class="section__label">Section 04</p>
+        <h2 class="section__heading">Patronage over Time</h2>
+        <p class="section__intro">
+          Patronage data shows how public transport demand changed after major disruptions
+          and how weekday travel still differs from weekend travel. This section uses time
+          as the main structure, so the chart choices follow the course-note distinction
+          between ordered trends and categorical comparison.
+        </p>
+      </div>
+      <div class="section__summary" aria-label="Patronage summary">
+        <div class="summary__item"><strong>6</strong>years of monthly patronage trend data</div>
+        <div class="summary__item"><strong>2</strong>day types compared in the slope graph</div>
+      </div>
+    </div>
     <div class="section__rule"></div>
 
     <!-- Vis 9: Monthly patronage line chart -->
@@ -424,7 +629,7 @@
         Line chart: month is an ordered temporal attribute, vertical position encodes
         monthly patronage, and hue separates transport modes.
       </p>
-      <div class="chart__vis" id="line_patronage" style="min-height:400px;"></div>
+      <div class="chart__vis" id="line_patronage" style="min-height:340px;"></div>
       <p class="chart__source">Source: Department of Transport and Planning Victoria, monthly public transport patronage by mode</p>
     </div>
 
@@ -436,7 +641,7 @@
           Slope graph: each line links one mode's 2025 average weekday patronage to
           its weekend patronage on the same quantitative scale.
         </p>
-        <div class="chart__vis" id="slope_weekday_weekend" style="min-height:360px;"></div>
+        <div class="chart__vis" id="slope_weekday_weekend" style="min-height:300px;"></div>
         <p class="chart__source">Source: Department of Transport and Planning Victoria, 2025 average daily patronage</p>
       </div>
       <div class="narrative">
@@ -457,28 +662,42 @@
 
   <!-- ===================== SECTION 5 — Tourism ===================== -->
   <section class="section" id="s5">
-    <p class="section__label">Section 05</p>
-    <h2 class="section__heading">Tourism and Regional Rail</h2>
-    <p class="section__intro">
-      To extend the transport story beyond commuting, this section examines whether Victoria's tourism regions are well connected to the regional rail network and how overnight tourism demand has changed over time.
-    </p>
+    <div class="section__header">
+      <div>
+        <p class="section__label">Section 05</p>
+        <h2 class="section__heading">Tourism and Regional Rail</h2>
+        <p class="section__intro">
+          To extend the transport story beyond commuting, this section examines whether Victoria's tourism regions are well connected to the regional rail network and how overnight tourism demand has changed over time.
+        </p>
+      </div>
+      <div class="section__summary" aria-label="Tourism rail summary">
+        <div class="summary__item"><strong>12</strong>tourism regions compared for rail access</div>
+        <div class="summary__item"><strong>50 km</strong>used as the regional-station redundancy threshold</div>
+      </div>
+    </div>
     <div class="section__rule"></div>
 
     <div class="row row--2">
       <div class="chart">
         <h3 class="chart__title">Rail Access Difficulty by Tourism Region</h3>
         <p class="chart__subtitle">
-          Grid map: each tourism region is shown as one equal-sized cell. Colour luminance encodes distance to the nearest regional train station.
+          Ranked bar chart: each bar is one tourism region, ordered by distance to the nearest regional train station.
         </p>
-        <div class="chart__vis" id="grid_tourism_access" style="min-height:360px;"></div>
+        <div class="chart__vis" id="grid_tourism_access" style="min-height:310px;"></div>
         <p class="chart__source">Source: Derived from tourism region centres and regional train stops.</p>
       </div>
       <div class="narrative">
+        <figure class="media-card">
+          <img src="assets/twelve_apostles.jpg" alt="The Twelve Apostles coastline in regional Victoria.">
+          <figcaption>
+            The Twelve Apostles, a regional tourism destination used here as context for last-mile rail access.
+            Image: Diceman~commonswiki,
+            <a href="https://commons.wikimedia.org/wiki/File:The_Twelve_Apostles_Victoria_Australia.jpg">Wikimedia Commons</a>, public domain.
+          </figcaption>
+        </figure>
         <p>
-          The grid map removes differences in region size and map-label crowding so rail
-          access difficulty can be compared across tourism regions using the same visual
-          unit. It focuses on the measured access gap rather than implying passenger
-          flows that the data does not contain.
+          The ranked bar chart uses length and position to compare access difficulty.
+          It makes the longest last-mile gaps stand out without another map.
         </p>
         <div class="callout">
           Regions with long distances to the nearest train station may still attract visitors, but they place a heavier burden on car travel or last-mile transport.
@@ -492,7 +711,7 @@
         <p class="chart__subtitle">
           Bubble plot: horizontal position shows distance to the nearest regional train station, vertical position shows how many regional train stations sit within 50 km, and bubble size shows how many sit within 100 km.
         </p>
-        <div class="chart__vis" id="bubble_tourism" style="min-height:380px;"></div>
+        <div class="chart__vis" id="bubble_tourism" style="min-height:320px;"></div>
         <p class="chart__source">Source: Derived from tourism region centres and regional train stops.</p>
       </div>
       <div class="chart">
@@ -500,7 +719,7 @@
         <p class="chart__subtitle">
           Stacked area chart: visitor trips are grouped into intrastate overnight, interstate overnight, and international overnight segments from 2020 to 2025.
         </p>
-        <div class="chart__vis" id="area_tourism_demand" style="min-height:360px;"></div>
+        <div class="chart__vis" id="area_tourism_demand" style="min-height:310px;"></div>
         <p class="chart__source">Source: Victorian Tourism Statistics, year ending December 2025.</p>
       </div>
     </div>
@@ -508,30 +727,38 @@
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
-    <p><strong>Author:</strong> Jiaqi Liu&ensp;|&ensp;<strong>Student ID:</strong> 34422242&ensp;|&ensp;<strong>Date:</strong> May 2026</p>
-    <p><strong>Course:</strong> FIT2179 Data Visualisation, Monash University</p>
-    <p>
-      <strong>Data sources:</strong>
-      Transport Victoria Open Data;
-      VISTA (Victorian Integrated Survey of Travel and Activity);
-      ABS Census 2021;
-      Vicmap / DataShare Victoria;
-      DJSIR Tourism Statistics.
-    </p>
-    <p>
-      <strong>Tools:</strong>
-      Vega-Lite for all visualisations; HTML, CSS, and JavaScript for the web page.
-      AI tools (Claude, Anthropic) were used for code assistance and text editing.
-    </p>
-    <p>
-      This visualisation was created as part of an academic assignment
-      and is not intended for commercial use.
-    </p>
+    <div class="footer__grid">
+      <div>
+        <p><strong>Author:</strong> Jiaqi Liu&ensp;|&ensp;<strong>Student ID:</strong> 34422242&ensp;|&ensp;<strong>Date:</strong> May 2026</p>
+        <p><strong>Course:</strong> FIT2179 Data Visualisation, Monash University</p>
+      </div>
+      <div>
+        <p>
+          <strong>Data sources:</strong>
+          <a href="https://opendata.transport.vic.gov.au/dataset/gtfs-schedule">Transport Victoria Open Data - GTFS Schedule</a>;
+          <a href="https://discover.data.vic.gov.au/dataset/victorian-integrated-survey-of-travel-and-activity-vista/historical">VISTA 2024-2025</a>;
+          <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files">ABS ASGS LGA boundaries 2021</a>;
+          <a href="https://discover.data.vic.gov.au/dataset/monthly-public-transport-patronage-by-mode">DTP monthly patronage by mode</a>;
+          <a href="https://discover.data.vic.gov.au/dataset/monthly-average-patronage-by-day-type-and-by-mode">DTP patronage by day type and mode</a>;
+          <a href="https://www.tra.gov.au/en/tourism-statistics/domestic-tourism-statistics-results">Tourism Research Australia Domestic Tourism Statistics</a>;
+          <a href="https://www.tra.gov.au/en/tourism-statistics/international-tourism-results">TRA International Visitor Survey</a>;
+          <a href="https://www.tra.gov.au/en/profiles/tourism-regions-maps">TRA tourism regions maps</a>.
+        </p>
+        <p>
+          <strong>Tools:</strong>
+          Vega-Lite for all visualisations; HTML, CSS, and JavaScript for the web page.
+        </p>
+        <p>
+          <strong>Generative AI acknowledgement:</strong>
+          AI tools were used to check text grammar, background Research.
+        </p>
+        <p>
+        </p>
+      </div>
+    </div>
   </footer>
 
 </div><!-- /.page -->
-
-<!-- Your Vega-Lite embed calls -->
 <script src="js/vega_lite_vis.js"></script>
 </body>
 </html>

@@ -1,8 +1,18 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": null,
-  "width": 520,
-  "height": 360,
+  "width": "container",
+  "height": 340,
+  "padding": {
+    "left": 16,
+    "right": 38,
+    "top": 12,
+    "bottom": 12
+  },
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "background": "transparent",
   "data": {
     "url": "data/tourism_region_access.csv"
@@ -20,18 +30,32 @@
           "field": "distance_km",
           "type": "quantitative",
           "title": "Distance to nearest regional train station (km)",
+          "scale": {
+            "domain": [
+              -1,
+              60
+            ]
+          },
           "axis": {
             "grid": true,
-            "gridColor": "#E8E4DB"
+            "gridColor": "#E3E8E4",
+            "titlePadding": 8
           }
         },
         "y": {
           "field": "stations_within_50km",
           "type": "quantitative",
           "title": "Regional train stations within 50 km",
+          "scale": {
+            "domain": [
+              0,
+              66
+            ]
+          },
           "axis": {
             "grid": true,
-            "gridColor": "#E8E4DB"
+            "gridColor": "#E3E8E4",
+            "titlePadding": 12
           }
         },
         "size": {
@@ -40,10 +64,11 @@
           "title": "Stations within 100 km",
           "scale": {
             "range": [
-              80,
-              1800
+              60,
+              900
             ]
-          }
+          },
+          "legend": null
         },
         "color": {
           "field": "access_category",
@@ -56,10 +81,15 @@
               "Limited"
             ],
             "range": [
-              "#2E7D32",
-              "#D59A00",
-              "#C62828"
+              "#0072B2",
+              "#8D989D",
+              "#D55E00"
             ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "titleAnchor": "start"
           }
         },
         "tooltip": [
@@ -93,14 +123,23 @@
       }
     },
     {
+      "transform": [
+        {
+          "filter": "datum.distance_km <= 35 && datum.region != 'Melbourne' && datum.region != 'Geelong and the Bellarine' && datum.region != 'Murray' && datum.region != 'Goldfields' && datum.region != 'Gippsland'"
+        },
+        {
+          "calculate": "datum.region == 'Yarra Valley and Dandenong Ranges' ? 'Yarra/Dandenong' : datum.region == 'Daylesford and Macedon Ranges' ? 'Daylesford/Macedon' : datum.region == 'Geelong and the Bellarine' ? 'Geelong/Bellarine' : datum.region == 'Great Ocean Road' ? 'Great Ocean Rd' : datum.region",
+          "as": "short_region"
+        }
+      ],
       "mark": {
         "type": "text",
         "font": "Source Sans 3, sans-serif",
-        "fontSize": 10,
+        "fontSize": 13,
         "dx": 7,
         "dy": -6,
         "align": "left",
-        "color": "#3F3F3F"
+        "color": "#3D4648"
       },
       "encoding": {
         "x": {
@@ -112,7 +151,322 @@
           "type": "quantitative"
         },
         "text": {
-          "field": "region",
+          "field": "short_region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.region == 'Melbourne'"
+        },
+        {
+          "calculate": "'Melbourne'",
+          "as": "short_region"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 13,
+        "dx": 10,
+        "dy": -10,
+        "align": "left",
+        "baseline": "bottom",
+        "color": "#3D4648"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short_region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.region == 'Geelong and the Bellarine'"
+        },
+        {
+          "calculate": "'Geelong/Bellarine'",
+          "as": "short_region"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 13,
+        "dx": 10,
+        "dy": -8,
+        "align": "left",
+        "baseline": "bottom",
+        "color": "#3D4648"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short_region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.region == 'Murray'"
+        },
+        {
+          "calculate": "'Murray'",
+          "as": "short_region"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 13,
+        "dx": 9,
+        "dy": 14,
+        "align": "left",
+        "baseline": "top",
+        "color": "#3D4648"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short_region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.region == 'Goldfields'"
+        },
+        {
+          "calculate": "'Goldfields'",
+          "as": "short_region"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 13,
+        "dx": 10,
+        "dy": -12,
+        "align": "left",
+        "baseline": "bottom",
+        "color": "#3D4648"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short_region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.region == 'Gippsland'"
+        },
+        {
+          "calculate": "'Gippsland'",
+          "as": "short_region"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 13,
+        "dx": 11,
+        "dy": 12,
+        "align": "left",
+        "baseline": "top",
+        "color": "#3D4648"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short_region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.region == 'High Country'"
+        },
+        {
+          "calculate": "'High Country'",
+          "as": "short_region"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 13,
+        "dx": -8,
+        "dy": -24,
+        "align": "right",
+        "baseline": "bottom",
+        "color": "#3D4648"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short_region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.region == 'Great Ocean Road'"
+        },
+        {
+          "calculate": "'Great Ocean Rd'",
+          "as": "short_region"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 13,
+        "dx": -12,
+        "dy": 8,
+        "align": "right",
+        "baseline": "top",
+        "color": "#3D4648"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short_region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.region == 'Grampians'"
+        },
+        {
+          "calculate": "'Grampians'",
+          "as": "short_region"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 13,
+        "dx": -7,
+        "dy": -16,
+        "align": "right",
+        "baseline": "bottom",
+        "color": "#3D4648"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short_region",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.region == 'Phillip Island'"
+        },
+        {
+          "calculate": "'Phillip Island'",
+          "as": "short_region"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3, sans-serif",
+        "fontSize": 13,
+        "dx": 7,
+        "dy": -12,
+        "align": "left",
+        "baseline": "bottom",
+        "color": "#3D4648"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "stations_within_50km",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short_region",
           "type": "nominal"
         }
       }
@@ -126,14 +480,14 @@
     "axis": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12
+      "labelFontSize": 15,
+      "titleFontSize": 16
     },
     "legend": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12
+      "labelFontSize": 15,
+      "titleFontSize": 16
     }
   }
 }

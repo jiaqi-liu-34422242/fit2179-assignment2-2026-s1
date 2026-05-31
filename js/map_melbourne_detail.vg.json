@@ -2,30 +2,38 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": null,
   "width": "container",
-  "height": 400,
-  "autosize": {"type": "fit", "contains": "padding"},
-  "background": "transparent",
+  "height": 360,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "background": "#F1F5F4",
   "config": {
     "font": "Source Sans 3, sans-serif",
-    "view": {"stroke": null},
+    "view": {
+      "stroke": null
+    },
     "legend": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12,
+      "labelFontSize": 15,
+      "titleFontSize": 16,
       "symbolSize": 50,
       "orient": "bottom-left",
       "direction": "vertical",
       "offset": 5,
       "padding": 6,
-      "fillColor": "rgba(246,245,240,0.85)",
-      "strokeColor": "#C8C3B8",
+      "fillColor": "rgba(241,245,244,0.94)",
+      "strokeColor": "#73858A",
       "cornerRadius": 4
     }
   },
   "projection": {
     "type": "equirectangular",
-    "center": [144.96, -37.81],
+    "center": [
+      144.96,
+      -37.81
+    ],
     "scale": 38000
   },
   "params": [
@@ -33,8 +41,28 @@
       "name": "mode_select",
       "bind": {
         "input": "select",
-        "options": [null, "METRO TRAIN", "METRO TRAM", "METRO BUS", "REGIONAL TRAIN", "REGIONAL BUS", "REGIONAL COACH", "INTERSTATE TRAIN", "SKYBUS"],
-        "labels": ["Show All Modes", "Metro Train", "Metro Tram", "Metro Bus", "Regional Train", "Regional Bus", "Regional Coach", "Interstate Train", "Skybus"],
+        "options": [
+          null,
+          "METRO TRAIN",
+          "METRO TRAM",
+          "METRO BUS",
+          "REGIONAL TRAIN",
+          "REGIONAL BUS",
+          "REGIONAL COACH",
+          "INTERSTATE TRAIN",
+          "SKYBUS"
+        ],
+        "labels": [
+          "Show All Modes",
+          "Metro Train",
+          "Metro Tram",
+          "Metro Bus",
+          "Regional Train",
+          "Regional Bus",
+          "Regional Coach",
+          "Interstate Train",
+          "Skybus"
+        ],
         "name": "Transport Mode "
       }
     }
@@ -43,19 +71,26 @@
     {
       "data": {
         "url": "data/vic_lga_2021.topojson",
-        "format": {"type": "topojson", "feature": "LGA_2021_AUST_GDA2020"}
+        "format": {
+          "type": "topojson",
+          "feature": "LGA_2021_AUST_GDA2020"
+        }
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#E0DAC8",
-        "stroke": "#F6F5F0",
-        "strokeWidth": 0.8
+        "fill": "#D7E8F0",
+        "stroke": "#73858A",
+        "strokeWidth": 0.75
       }
     },
     {
-      "data": {"url": "data/pt_stops.csv"},
+      "data": {
+        "url": "data/pt_stops_victoria.csv"
+      },
       "transform": [
-        {"filter": "mode_select == null || datum.MODE == mode_select"},
+        {
+          "filter": "mode_select == null || datum.MODE == mode_select"
+        },
         {
           "calculate": "indexof(datum.MODE, 'TRAIN') >= 0 || datum.MODE == 'INTERSTATE TRAIN' ? 'Train' : indexof(datum.MODE, 'TRAM') >= 0 ? 'Tram' : indexof(datum.MODE, 'BUS') >= 0 ? 'Bus' : 'Regional'",
           "as": "MODE_GROUP"
@@ -63,14 +98,24 @@
       ],
       "mark": {
         "type": "circle",
-        "opacity": 0.8,
-        "strokeWidth": 0
+        "opacity": 0.88,
+        "stroke": "rgba(255,255,255,0.55)",
+        "strokeWidth": 0.25
       },
       "encoding": {
-        "longitude": {"field": "LONGITUDE", "type": "quantitative"},
-        "latitude": {"field": "LATITUDE", "type": "quantitative"},
+        "longitude": {
+          "field": "LONGITUDE",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "LATITUDE",
+          "type": "quantitative"
+        },
         "size": {
-          "condition": {"test": "mode_select != null", "value": 18},
+          "condition": {
+            "test": "mode_select != null",
+            "value": 18
+          },
           "value": 8
         },
         "color": {
@@ -78,18 +123,41 @@
           "type": "nominal",
           "title": "Mode",
           "scale": {
-            "domain": ["Train", "Tram", "Bus", "Regional"],
-            "range": ["#004B87", "#78BE20", "#F58220", "#7B2D8E"]
+            "domain": [
+              "Train",
+              "Tram",
+              "Bus",
+              "Regional"
+            ],
+            "range": [
+              "#0072B2",
+              "#CC79A7",
+              "#D55E00",
+              "#8D989D"
+            ]
           }
         },
         "order": {
           "field": "MODE_GROUP",
           "type": "nominal",
-          "sort": ["Bus", "Regional", "Tram", "Train"]
+          "sort": [
+            "Bus",
+            "Regional",
+            "Tram",
+            "Train"
+          ]
         },
         "tooltip": [
-          {"field": "STOP_NAME", "type": "nominal", "title": "Stop"},
-          {"field": "MODE", "type": "nominal", "title": "Mode"}
+          {
+            "field": "STOP_NAME",
+            "type": "nominal",
+            "title": "Stop"
+          },
+          {
+            "field": "MODE",
+            "type": "nominal",
+            "title": "Mode"
+          }
         ]
       }
     }

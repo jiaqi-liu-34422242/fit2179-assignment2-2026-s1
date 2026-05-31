@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": null,
   "width": "container",
-  "height": 340,
+  "height": 315,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -19,8 +19,12 @@
   "encoding": {
     "x": {
       "field": "year",
-      "type": "ordinal",
-      "title": "Year ending December"
+      "type": "quantitative",
+      "title": "Year ending December",
+      "axis": {
+        "format": "d",
+        "tickMinStep": 1
+      }
     },
     "y": {
       "field": "visitor_trips_000",
@@ -29,7 +33,7 @@
       "stack": "zero",
       "axis": {
         "grid": true,
-        "gridColor": "#E8E4DB"
+        "gridColor": "#E3E8E4"
       }
     },
     "color": {
@@ -43,9 +47,9 @@
           "International overnight"
         ],
         "range": [
-          "#004B87",
-          "#78BE20",
-          "#F58220"
+          "#0072B2",
+          "#CC79A7",
+          "#8D989D"
         ]
       }
     },
@@ -85,16 +89,16 @@
     "axis": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12,
-      "labelColor": "#4A4A4A",
-      "titleColor": "#4A4A4A"
+      "labelFontSize": 15,
+      "titleFontSize": 16,
+      "labelColor": "#475354",
+      "titleColor": "#475354"
     },
     "legend": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12,
+      "labelFontSize": 15,
+      "titleFontSize": 16,
       "orient": "bottom",
       "direction": "horizontal"
     }

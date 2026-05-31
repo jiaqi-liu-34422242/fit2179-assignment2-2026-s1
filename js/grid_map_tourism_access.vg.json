@@ -1,8 +1,12 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": null,
-  "width": 500,
-  "height": 360,
+  "width": "container",
+  "height": 320,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "background": "transparent",
   "data": {
     "url": "data/tourism_region_access.csv"
@@ -10,44 +14,68 @@
   "layer": [
     {
       "mark": {
-        "type": "rect",
-        "cornerRadius": 6,
-        "stroke": "white",
-        "strokeWidth": 2
+        "type": "bar",
+        "cornerRadiusEnd": 3
       },
       "encoding": {
         "x": {
-          "field": "x_pos",
-          "type": "ordinal",
-          "title": null,
-          "sort": [
-            1,
-            2,
-            3,
-            4
-          ],
-          "axis": null
-        },
-        "y": {
-          "field": "y_pos",
-          "type": "ordinal",
-          "title": null,
-          "sort": [
-            1,
-            2,
-            3
-          ],
-          "axis": null
-        },
-        "color": {
           "field": "distance_km",
           "type": "quantitative",
-          "title": "Nearest-station distance (km)",
+          "title": "Distance to nearest regional train station (km)",
           "scale": {
-            "scheme": "oranges"
+            "domain": [
+              0,
+              55
+            ],
+            "zero": true
+          },
+          "axis": {
+            "grid": true,
+            "tickCount": 6
+          }
+        },
+        "y": {
+          "field": "region",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Phillip Island",
+            "Grampians",
+            "Great Ocean Road",
+            "High Country",
+            "Mornington Peninsula",
+            "Yarra Valley and Dandenong Ranges",
+            "Daylesford and Macedon Ranges",
+            "Gippsland",
+            "Murray",
+            "Goldfields",
+            "Geelong and the Bellarine",
+            "Melbourne"
+          ],
+          "axis": {
+            "labelLimit": 210,
+            "labelPadding": 6
+          }
+        },
+        "color": {
+          "field": "access_category",
+          "type": "nominal",
+          "title": "Rail access",
+          "scale": {
+            "domain": [
+              "Good",
+              "Moderate",
+              "Limited"
+            ],
+            "range": [
+              "#0072B2",
+              "#8D989D",
+              "#D55E00"
+            ]
           },
           "legend": {
-            "orient": "right"
+            "orient": "bottom",
+            "direction": "horizontal"
           }
         },
         "tooltip": [
@@ -68,84 +96,90 @@
             "format": ".1f"
           },
           {
-            "field": "access_category",
-            "type": "nominal",
-            "title": "Access category"
+            "field": "stations_within_50km",
+            "type": "quantitative",
+            "title": "Stations within 50 km",
+            "format": ",.0f"
+          },
+          {
+            "field": "stations_within_100km",
+            "type": "quantitative",
+            "title": "Stations within 100 km",
+            "format": ",.0f"
           }
         ]
       }
     },
     {
       "mark": {
-        "type": "text",
-        "align": "center",
-        "baseline": "middle",
-        "font": "Source Sans 3, sans-serif",
-        "fontSize": 10,
-        "fontWeight": 600,
-        "color": "#3F3F3F",
-        "dy": -10
+        "type": "rule",
+        "stroke": "#9BA49F",
+        "strokeDash": [
+          5,
+          4
+        ],
+        "strokeWidth": 1.2
       },
       "encoding": {
         "x": {
-          "field": "x_pos",
-          "type": "ordinal",
-          "sort": [
-            1,
-            2,
-            3,
-            4
-          ],
-          "axis": null
-        },
-        "y": {
-          "field": "y_pos",
-          "type": "ordinal",
-          "sort": [
-            1,
-            2,
-            3
-          ],
-          "axis": null
-        },
-        "text": {
-          "field": "region",
-          "type": "nominal"
+          "datum": 25
         }
       }
     },
     {
       "mark": {
         "type": "text",
-        "align": "center",
-        "baseline": "middle",
-        "font": "Source Sans 3, sans-serif",
-        "fontSize": 12,
-        "fontWeight": "bold",
-        "color": "#3F3F3F",
-        "dy": 12
+        "align": "left",
+        "baseline": "bottom",
+        "dx": 4,
+        "dy": -4,
+        "fontSize": 14,
+        "color": "#667173"
       },
       "encoding": {
         "x": {
-          "field": "x_pos",
-          "type": "ordinal",
-          "sort": [
-            1,
-            2,
-            3,
-            4
-          ],
-          "axis": null
+          "datum": 25
         },
         "y": {
-          "field": "y_pos",
-          "type": "ordinal",
+          "datum": "Phillip Island"
+        },
+        "text": {
+          "value": "25 km reference"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 5,
+        "fontSize": 14,
+        "fontWeight": 600,
+        "color": "#1F2728"
+      },
+      "encoding": {
+        "x": {
+          "field": "distance_km",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "region",
+          "type": "nominal",
           "sort": [
-            1,
-            2,
-            3
-          ],
-          "axis": null
+            "Phillip Island",
+            "Grampians",
+            "Great Ocean Road",
+            "High Country",
+            "Mornington Peninsula",
+            "Yarra Valley and Dandenong Ranges",
+            "Daylesford and Macedon Ranges",
+            "Gippsland",
+            "Murray",
+            "Goldfields",
+            "Geelong and the Bellarine",
+            "Melbourne"
+          ]
         },
         "text": {
           "field": "distance_label",
@@ -154,48 +188,10 @@
       },
       "transform": [
         {
-          "calculate": "datum.distance_km + ' km'",
+          "calculate": "format(datum.distance_km, '.1f') + ' km'",
           "as": "distance_label"
         }
       ]
-    },
-    {
-      "mark": {
-        "type": "text",
-        "align": "center",
-        "baseline": "middle",
-        "font": "Source Sans 3, sans-serif",
-        "fontSize": 10,
-        "color": "#666",
-        "dy": 24
-      },
-      "encoding": {
-        "x": {
-          "field": "x_pos",
-          "type": "ordinal",
-          "sort": [
-            1,
-            2,
-            3,
-            4
-          ],
-          "axis": null
-        },
-        "y": {
-          "field": "y_pos",
-          "type": "ordinal",
-          "sort": [
-            1,
-            2,
-            3
-          ],
-          "axis": null
-        },
-        "text": {
-          "field": "access_category",
-          "type": "nominal"
-        }
-      }
     }
   ],
   "config": {
@@ -203,11 +199,22 @@
     "view": {
       "stroke": null
     },
+    "axis": {
+      "labelFont": "Source Sans 3, sans-serif",
+      "titleFont": "Source Sans 3, sans-serif",
+      "labelFontSize": 15,
+      "titleFontSize": 16,
+      "gridColor": "#E3E8E4",
+      "domainColor": "#A8B0AC",
+      "tickColor": "#A8B0AC",
+      "labelColor": "#1F2728",
+      "titleColor": "#1F2728"
+    },
     "legend": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12
+      "labelFontSize": 15,
+      "titleFontSize": 16
     }
   }
 }

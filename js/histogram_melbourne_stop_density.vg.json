@@ -2,60 +2,175 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": null,
   "width": "container",
-  "height": 360,
+  "height": 320,
   "autosize": {
     "type": "fit",
     "contains": "padding"
   },
   "background": "transparent",
   "data": {
-    "url": "data/melbourne_lga_stop_density.topojson",
-    "format": {
-      "type": "topojson",
-      "feature": "LGA_2021_AUST_GDA2020"
+    "url": "data/melbourne_lga_density_histogram_bins.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "color": "#0072B2",
+        "cornerRadiusEnd": 2,
+        "opacity": 0.92
+      },
+      "encoding": {
+        "x": {
+          "field": "bin_start",
+          "type": "quantitative",
+          "title": "Stops per square kilometre",
+          "scale": {
+            "domain": [
+              0,
+              25
+            ]
+          },
+          "axis": {
+            "grid": false,
+            "tickMinStep": 5
+          }
+        },
+        "x2": {
+          "field": "bin_end"
+        },
+        "y": {
+          "field": "lga_count",
+          "type": "quantitative",
+          "title": "Number of LGAs",
+          "scale": {
+            "domain": [
+              0,
+              10
+            ]
+          },
+          "axis": {
+            "grid": true,
+            "tickMinStep": 1
+          }
+        },
+        "tooltip": [
+          {
+            "field": "bin_start",
+            "type": "quantitative",
+            "title": "Bin start",
+            "format": ".0f"
+          },
+          {
+            "field": "bin_end",
+            "type": "quantitative",
+            "title": "Bin end",
+            "format": ".0f"
+          },
+          {
+            "field": "lga_count",
+            "type": "quantitative",
+            "title": "LGAs",
+            "format": ".0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -4,
+        "fontWeight": 700,
+        "fontSize": 14,
+        "color": "#1F2728"
+      },
+      "encoding": {
+        "x": {
+          "field": "bin_mid",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "lga_count",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              10
+            ]
+          }
+        },
+        "text": {
+          "field": "lga_count",
+          "type": "quantitative",
+          "format": ".0f"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "median_density": 9.428
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#D55E00",
+        "strokeWidth": 2,
+        "strokeDash": [
+          5,
+          4
+        ]
+      },
+      "encoding": {
+        "x": {
+          "field": "median_density",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "median_density",
+            "type": "quantitative",
+            "title": "Median stops per km²",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "median_density": 9.428
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": 6,
+        "dy": 8,
+        "fontWeight": 700,
+        "fontSize": 14,
+        "color": "#D55E00"
+      },
+      "encoding": {
+        "x": {
+          "field": "median_density",
+          "type": "quantitative"
+        },
+        "y": {
+          "value": 0
+        },
+        "text": {
+          "value": "Median"
+        }
+      }
     }
-  },
-  "mark": {
-    "type": "bar",
-    "color": "#004B87",
-    "cornerRadiusEnd": 2,
-    "opacity": 0.92
-  },
-  "encoding": {
-    "x": {
-      "field": "properties.stops_per_sqkm",
-      "type": "quantitative",
-      "bin": {
-        "maxbins": 9
-      },
-      "title": "Stops per square kilometre",
-      "axis": {
-        "grid": false
-      }
-    },
-    "y": {
-      "aggregate": "count",
-      "type": "quantitative",
-      "title": "Number of LGAs",
-      "axis": {
-        "grid": true,
-        "tickMinStep": 1
-      }
-    },
-    "tooltip": [
-      {
-        "field": "properties.stops_per_sqkm",
-        "type": "quantitative",
-        "bin": true,
-        "title": "Stop-density bin"
-      },
-      {
-        "aggregate": "count",
-        "type": "quantitative",
-        "title": "LGAs"
-      }
-    ]
-  },
+  ],
   "config": {
     "font": "Source Sans 3, sans-serif",
     "view": {
@@ -64,13 +179,13 @@
     "axis": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12,
-      "gridColor": "#E8E4DB",
-      "domainColor": "#9A968D",
-      "tickColor": "#9A968D",
-      "labelColor": "#1B1B1B",
-      "titleColor": "#1B1B1B"
+      "labelFontSize": 15,
+      "titleFontSize": 16,
+      "gridColor": "#E3E8E4",
+      "domainColor": "#A8B0AC",
+      "tickColor": "#A8B0AC",
+      "labelColor": "#1F2728",
+      "titleColor": "#1F2728"
     }
   }
 }

@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": null,
   "width": "container",
-  "height": 380,
+  "height": 340,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -54,10 +54,37 @@
               "Regional train"
             ],
             "range": [
-              "#004B87",
-              "#78BE20",
-              "#F58220",
-              "#7B2D8E"
+              "#0072B2",
+              "#CC79A7",
+              "#D55E00",
+              "#8D989D"
+            ]
+          }
+        },
+        "strokeDash": {
+          "field": "mode",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Metropolitan train",
+              "Metropolitan tram",
+              "Metropolitan bus",
+              "Regional train"
+            ],
+            "range": [
+              [],
+              [
+                6,
+                3
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                9,
+                3
+              ]
             ]
           }
         },
@@ -111,7 +138,7 @@
       },
       "mark": {
         "type": "rule",
-        "stroke": "#9A968D",
+        "stroke": "#A8B0AC",
         "strokeDash": [
           4,
           4
@@ -152,8 +179,8 @@
         "baseline": "middle",
         "dx": -4,
         "font": "Source Sans 3, sans-serif",
-        "fontSize": 10,
-        "color": "#5F5A52"
+        "fontSize": 14,
+        "color": "#596265"
       },
       "encoding": {
         "x": {
@@ -178,17 +205,17 @@
     "axis": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12,
-      "gridColor": "#E8E4DB",
-      "domainColor": "#9A968D",
-      "tickColor": "#9A968D"
+      "labelFontSize": 15,
+      "titleFontSize": 16,
+      "gridColor": "#E3E8E4",
+      "domainColor": "#A8B0AC",
+      "tickColor": "#A8B0AC"
     },
     "legend": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12,
+      "labelFontSize": 15,
+      "titleFontSize": 16,
       "orient": "bottom",
       "direction": "horizontal"
     }

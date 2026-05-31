@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": null,
   "width": "container",
-  "height": 360,
+  "height": 320,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -11,13 +11,12 @@
   "data": {
     "url": "data/vista_income_mode.csv"
   },
-  "mark": {
-    "type": "point",
-    "filled": true,
-    "size": 85,
-    "color": "#004B87",
-    "opacity": 0.88
-  },
+  "transform": [
+    {
+      "calculate": "0",
+      "as": "baseline"
+    }
+  ],
   "encoding": {
     "y": {
       "field": "income_band",
@@ -42,32 +41,6 @@
       ],
       "axis": {
         "labelLimit": 260
-      }
-    },
-    "x": {
-      "field": "pt_share_percent",
-      "type": "quantitative",
-      "title": "Public transport share of trips (%)",
-      "scale": {
-        "domain": [
-          0,
-          16
-        ],
-        "zero": true
-      },
-      "axis": {
-        "grid": true,
-        "values": [
-          0,
-          2,
-          4,
-          6,
-          8,
-          10,
-          12,
-          14,
-          16
-        ]
       }
     },
     "tooltip": [
@@ -96,6 +69,84 @@
       }
     ]
   },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#8D989D",
+        "strokeWidth": 2.5,
+        "opacity": 0.78
+      },
+      "encoding": {
+        "x": {
+          "field": "baseline",
+          "type": "quantitative",
+          "title": "Public transport share of trips (%)",
+          "scale": {
+            "domain": [
+              0,
+              16
+            ],
+            "zero": true
+          },
+          "axis": {
+            "grid": true,
+            "values": [
+              0,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              16
+            ]
+          }
+        },
+        "x2": {
+          "field": "pt_share_percent"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 110,
+        "color": "#0072B2",
+        "opacity": 0.96
+      },
+      "encoding": {
+        "x": {
+          "field": "pt_share_percent",
+          "type": "quantitative",
+          "title": "Public transport share of trips (%)",
+          "scale": {
+            "domain": [
+              0,
+              16
+            ],
+            "zero": true
+          },
+          "axis": {
+            "grid": true,
+            "values": [
+              0,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              16
+            ]
+          }
+        }
+      }
+    }
+  ],
   "config": {
     "font": "Source Sans 3, sans-serif",
     "view": {
@@ -104,19 +155,19 @@
     "axis": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12,
-      "gridColor": "#E8E4DB",
-      "domainColor": "#9A968D",
-      "tickColor": "#9A968D",
-      "labelColor": "#1B1B1B",
-      "titleColor": "#1B1B1B"
+      "labelFontSize": 15,
+      "titleFontSize": 16,
+      "gridColor": "#E3E8E4",
+      "domainColor": "#A8B0AC",
+      "tickColor": "#A8B0AC",
+      "labelColor": "#1F2728",
+      "titleColor": "#1F2728"
     },
     "legend": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12,
+      "labelFontSize": 15,
+      "titleFontSize": 16,
       "orient": "bottom",
       "direction": "horizontal"
     }

@@ -2,12 +2,12 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": null,
   "width": "container",
-  "height": 460,
+  "height": 400,
   "autosize": {
     "type": "fit",
     "contains": "padding"
   },
-  "background": "transparent",
+  "background": "#F1F5F4",
   "projection": {
     "type": "equirectangular",
     "center": [
@@ -23,23 +23,128 @@
       "feature": "LGA_2021_AUST_GDA2020"
     }
   },
+  "params": [
+    {
+      "name": "mode_select",
+      "value": "Total",
+      "bind": {
+        "input": "select",
+        "name": "Transport mode: ",
+        "options": [
+          "Total",
+          "Bus",
+          "Train",
+          "Tram",
+          "Regional"
+        ]
+      }
+    },
+    {
+      "name": "lga_select",
+      "select": {
+        "type": "point",
+        "fields": [
+          "properties.LGA_NAME21"
+        ],
+        "on": "click",
+        "clear": "dblclick"
+      }
+    },
+    {
+      "name": "lga_hover",
+      "select": {
+        "type": "point",
+        "fields": [
+          "properties.LGA_NAME21"
+        ],
+        "on": "pointerover",
+        "clear": "pointerout"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "mode_select == 'Total' ? datum.properties.stops_count : datum.properties[mode_select]",
+      "as": "selected_stops"
+    },
+    {
+      "calculate": "mode_select",
+      "as": "selected_mode"
+    },
+    {
+      "calculate": "datum.selected_stops / datum.properties.AREASQKM21",
+      "as": "selected_density"
+    }
+  ],
   "mark": {
     "type": "geoshape",
-    "stroke": "#F6F5F0",
-    "strokeWidth": 0.8
+    "cursor": "pointer"
   },
   "encoding": {
     "color": {
-      "field": "properties.stops_per_sqkm",
+      "field": "selected_density",
       "type": "quantitative",
-      "title": "Stops per km\u00b2",
+      "title": "Stops per km²",
       "scale": {
-        "scheme": "blues"
+        "type": "threshold",
+        "domain": [
+          2,
+          6,
+          10,
+          14,
+          18
+        ],
+        "range": [
+          "#BFDDEA",
+          "#8FC3DC",
+          "#5EA2CB",
+          "#2E7FB8",
+          "#0F5B99",
+          "#08306B"
+        ]
       },
       "legend": {
         "orient": "right",
         "gradientLength": 220
       }
+    },
+    "stroke": {
+      "condition": [
+        {
+          "param": "lga_select",
+          "empty": false,
+          "value": "#1F2728"
+        },
+        {
+          "param": "lga_hover",
+          "empty": false,
+          "value": "#D55E00"
+        }
+      ],
+      "value": "#526368"
+    },
+    "strokeWidth": {
+      "condition": [
+        {
+          "param": "lga_select",
+          "empty": false,
+          "value": 2.6
+        },
+        {
+          "param": "lga_hover",
+          "empty": false,
+          "value": 2
+        }
+      ],
+      "value": 1.1
+    },
+    "opacity": {
+      "condition": {
+        "param": "lga_select",
+        "empty": false,
+        "value": 1
+      },
+      "value": 1
     },
     "tooltip": [
       {
@@ -48,22 +153,57 @@
         "title": "LGA"
       },
       {
+        "field": "selected_mode",
+        "type": "nominal",
+        "title": "Selected mode"
+      },
+      {
+        "field": "selected_stops",
+        "type": "quantitative",
+        "title": "Selected stops",
+        "format": ",.0f"
+      },
+      {
+        "field": "selected_density",
+        "type": "quantitative",
+        "title": "Selected stops per km²",
+        "format": ".2f"
+      },
+      {
         "field": "properties.stops_count",
         "type": "quantitative",
-        "title": "Stops",
+        "title": "Total stops",
+        "format": ",.0f"
+      },
+      {
+        "field": "properties.Bus",
+        "type": "quantitative",
+        "title": "Bus stops",
+        "format": ",.0f"
+      },
+      {
+        "field": "properties.Train",
+        "type": "quantitative",
+        "title": "Train stops",
+        "format": ",.0f"
+      },
+      {
+        "field": "properties.Tram",
+        "type": "quantitative",
+        "title": "Tram stops",
+        "format": ",.0f"
+      },
+      {
+        "field": "properties.Regional",
+        "type": "quantitative",
+        "title": "Regional stops",
         "format": ",.0f"
       },
       {
         "field": "properties.AREASQKM21",
         "type": "quantitative",
-        "title": "Area km\u00b2",
+        "title": "Area km²",
         "format": ",.1f"
-      },
-      {
-        "field": "properties.stops_per_sqkm",
-        "type": "quantitative",
-        "title": "Stops per km\u00b2",
-        "format": ".2f"
       }
     ]
   },
@@ -79,8 +219,8 @@
     "legend": {
       "labelFont": "Source Sans 3, sans-serif",
       "titleFont": "Source Sans 3, sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12
+      "labelFontSize": 15,
+      "titleFontSize": 16
     }
   }
 }
